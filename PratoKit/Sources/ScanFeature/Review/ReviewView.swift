@@ -15,7 +15,9 @@ struct ReviewView: View {
                 mealKindPicker
                     .padding(.top, 24)
 
-                Text(L10n.Review.disclaimer)
+                Text(viewModel.usesDemonstrationValues
+                     ? "\(L10n.Review.disclaimer) \(L10n.Review.demonstrationValues)"
+                     : L10n.Review.disclaimer)
                     .font(PratoFont.secondary)
                     .foregroundStyle(PratoColor.textSecondary)
                     .padding(.horizontal, 16)
@@ -23,6 +25,11 @@ struct ReviewView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(PratoColor.softSurface, in: .rect(cornerRadius: 16))
                     .padding(.top, 20)
+
+                if !viewModel.unmatched.isEmpty {
+                    unmatchedSection
+                        .padding(.top, 20)
+                }
 
                 items
                     .padding(.top, 12)
@@ -84,6 +91,49 @@ struct ReviewView: View {
     private func removeAction(for editor: PortionEditor) -> (@MainActor () -> Void)? {
         guard case .edit(let id) = editor.mode else { return nil }
         return { viewModel.remove(id) }
+    }
+
+    private var unmatchedSection: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(L10n.Review.toConfirmTitle)
+                .font(PratoFont.bodyEmphasized)
+                .foregroundStyle(PratoColor.textPrimary)
+                .accessibilityAddTraits(.isHeader)
+            Text(L10n.Review.toConfirmSubtitle)
+                .font(PratoFont.caption)
+                .foregroundStyle(PratoColor.textSecondary)
+                .padding(.top, 2)
+
+            ForEach(viewModel.unmatched) { item in
+                HStack(spacing: 12) {
+                    Button {
+                        viewModel.unmatchedTapped(item)
+                    } label: {
+                        UnmatchedRow(item: item, suggestion: item.suggestedFoodID.flatMap(viewModel.catalog.food(id:)))
+                    }
+                    .buttonStyle(.plain)
+
+                    Button {
+                        viewModel.dismissUnmatched(item.id)
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(PratoColor.textSecondary)
+                            .frame(width: 44, height: 44)
+                    }
+                    .accessibilityLabel(L10n.Review.dismissUnmatched(item.name))
+                }
+                Divider()
+                    .overlay(PratoColor.border)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(PratoColor.surface, in: .rect(cornerRadius: 16))
+        .overlay {
+            RoundedRectangle(cornerRadius: 16)
+                .strokeBorder(PratoColor.carbs.opacity(0.6), lineWidth: 1)
+        }
     }
 
     private var mealKindPicker: some View {
@@ -148,10 +198,52 @@ struct ReviewView: View {
     }
 }
 
+/// A food the analysis couldn't match: its name, preparation and what the user should do.
+private struct UnmatchedRow: View {
+
+    let item: UnmatchedFood
+    let suggestion: Food?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(title)
+                .font(PratoFont.body.weight(.medium))
+                .foregroundStyle(PratoColor.textPrimary)
+            Text(detail)
+                .font(PratoFont.caption)
+                .foregroundStyle(PratoColor.textSecondary)
+        }
+        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+        .padding(.vertical, 8)
+        .contentShape(.rect)
+        .accessibilityElement(children: .combine)
+        .accessibilityHint(L10n.Review.itemHint)
+    }
+
+    private var title: String {
+        guard let preparation = item.preparation else { return item.name }
+        return "\(item.name) (\(preparation))"
+    }
+
+    private var detail: String {
+        if let suggestion {
+            return L10n.Review.looksLike(suggestion.name())
+        }
+        if !item.alternatives.isEmpty {
+            return L10n.Review.couldBe(item.alternatives.joined(separator: ", "))
+        }
+        return L10n.Review.notInCatalog
+    }
+}
+
 #Preview {
     NavigationStack {
         ReviewView(viewModel: ReviewViewModel(
             suggestions: MockMealAnalyzer().result,
+            unmatched: [
+                UnmatchedFood(name: "Farofa", preparation: nil, estimatedGrams: 40, alternatives: []),
+                UnmatchedFood(name: "Feijão preto", preparation: "cozido", estimatedGrams: 90, alternatives: [], suggestedFoodID: "beans-carioca-cooked")
+            ],
             photo: nil,
             catalog: .development,
             store: InMemoryMealStore(),

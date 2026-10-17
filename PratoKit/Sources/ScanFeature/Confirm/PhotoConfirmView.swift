@@ -5,6 +5,7 @@ import SwiftUI
 struct PhotoConfirmView: View {
 
     let photo: Data?
+    var sendsPhotoToCloud = false
     let onEvent: @MainActor (PhotoConfirmEvent) -> Void
 
     var body: some View {
@@ -15,9 +16,17 @@ struct PhotoConfirmView: View {
                 PhotoFrame(photo: photo)
                     .padding(.top, 28)
 
+                if sendsPhotoToCloud {
+                    Label(L10n.Confirm.cloudNotice, systemImage: "icloud.and.arrow.up")
+                        .font(PratoFont.caption)
+                        .foregroundStyle(PratoColor.textSecondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 20)
+                }
+
                 Button(L10n.Confirm.analyze) { onEvent(.analyzeRequested) }
                     .buttonStyle(.pratoPrimary)
-                    .padding(.top, 32)
+                    .padding(.top, sendsPhotoToCloud ? 16 : 32)
 
                 Button(L10n.Confirm.retake) { onEvent(.retakeRequested) }
                     .buttonStyle(.pratoText)
@@ -33,6 +42,6 @@ struct PhotoConfirmView: View {
 
 #Preview {
     NavigationStack {
-        PhotoConfirmView(photo: nil) { _ in }
+        PhotoConfirmView(photo: nil, sendsPhotoToCloud: true) { _ in }
     }
 }

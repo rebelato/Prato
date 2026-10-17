@@ -10,3 +10,6 @@ build/
 .build/
 .swiftpm/
 PratoKit/Package.resolved
+
+# Firebase: each developer adds their own copy (see docs/firebase-setup.md)
+Prato/GoogleService-Info.plist

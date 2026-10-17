@@ -20,11 +20,13 @@ struct ReviewViewModelTests {
 
     private func makeViewModel(
         suggestions: [FoodSuggestion] = MockMealAnalyzer().result,
+        unmatched: [UnmatchedFood] = [],
         store: any MealStoring = InMemoryMealStore(),
         onEvent: @escaping @MainActor (ReviewEvent) -> Void = { _ in }
     ) -> ReviewViewModel {
         ReviewViewModel(
             suggestions: suggestions,
+            unmatched: unmatched,
             photo: nil,
             catalog: .development,
             store: store,
@@ -142,6 +144,71 @@ struct ReviewViewModelTests {
         #expect(viewModel.showsSaveError)
         #expect(viewModel.canSave)
         #expect(events.isEmpty)
+    }
+}
+
+@MainActor
+struct UnmatchedFoodTests {
+
+    private let farofa = UnmatchedFood(name: "Farofa", preparation: nil, estimatedGrams: 40, alternatives: [])
+    private let blackBeans = UnmatchedFood(name: "Feijão preto", preparation: "cozido", estimatedGrams: 90,
+                                           alternatives: [], suggestedFoodID: "beans-carioca-cooked")
+
+    private func makeViewModel() -> ReviewViewModel {
+        ReviewViewModel(suggestions: [], unmatched: [farofa, blackBeans], photo: nil, catalog: .development,
+                        store: InMemoryMealStore(), date: .now) { _ in }
+    }
+
+    @Test func confirmingStartsFromTheSuggestionAndEstimate() throws {
+        let viewModel = makeViewModel()
+
+        viewModel.unmatchedTapped(blackBeans)
+
+        let editor = try #require(viewModel.editor)
+        #expect(editor.food.id == "beans-carioca-cooked")
+        #expect(editor.grams == 90)
+        #expect(editor.recognizedName == "Feijão preto")
+    }
+
+    @Test func applyingAddsThePortionAndResolvesTheItem() throws {
+        let viewModel = makeViewModel()
+        viewModel.unmatchedTapped(farofa)
+
+        viewModel.apply(try #require(viewModel.editor))
+
+        #expect(viewModel.portions.count == 1)
+        #expect(viewModel.portions[0].grams == 40)
+        #expect(viewModel.unmatched == [blackBeans])
+        #expect(viewModel.canSave)
+    }
+
+    @Test func cancellingKeepsTheItemToConfirm() {
+        let viewModel = makeViewModel()
+        viewModel.unmatchedTapped(farofa)
+
+        viewModel.cancelEditing()
+
+        #expect(viewModel.unmatched.count == 2)
+        #expect(viewModel.portions.isEmpty)
+    }
+
+    @Test func dismissingDropsTheItem() {
+        let viewModel = makeViewModel()
+
+        viewModel.dismissUnmatched(farofa.id)
+
+        #expect(viewModel.unmatched == [blackBeans])
+    }
+
+    @Test func onlyUnmatchedFoodsCannotBeSaved() {
+        #expect(!makeViewModel().canSave)
+    }
+
+    @Test func demonstrationValuesAreFlagged() {
+        let viewModel = ReviewViewModel(suggestions: MockMealAnalyzer().result, photo: nil, catalog: .development,
+                                        store: InMemoryMealStore(), date: .now) { _ in }
+
+        #expect(viewModel.usesDemonstrationValues)
     }
 }
 

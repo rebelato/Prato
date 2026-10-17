@@ -38,7 +38,9 @@ enum PhotoConfirmEvent: Event {
 }
 
 enum AnalyzingEvent: Event {
-    case finished([FoodSuggestion])
+    case finished(MealAnalysis)
+    /// No food in the photo; the user wants to take another one.
+    case retakeRequested
     /// The analysis failed and the user chose to add the foods by hand.
     case continueWithoutAnalysis
 }

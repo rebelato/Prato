@@ -24,7 +24,9 @@ public struct ScanFlowView: View {
     private func destination(for route: ScanRoute) -> some View {
         switch route {
         case .confirm:
-            PhotoConfirmView(photo: coordinator.photo) { coordinator.send($0) }
+            PhotoConfirmView(photo: coordinator.photo, sendsPhotoToCloud: coordinator.sendsPhotoToCloud) {
+                coordinator.send($0)
+            }
         case .analyzing:
             if let viewModel = coordinator.analyzingViewModel {
                 AnalyzingView(viewModel: viewModel)
