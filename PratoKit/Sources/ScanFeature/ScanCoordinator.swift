@@ -21,7 +21,7 @@ public final class ScanCoordinator: Coordinator {
     public private(set) var analyzingViewModel: AnalyzingViewModel?
     public private(set) var reviewViewModel: ReviewViewModel?
     /// The meal shown on the confirmation screen, once saved.
-    public private(set) var savedDraft: MealDraft?
+    public private(set) var savedMeal: Meal?
 
     @ObservationIgnored public private(set) lazy var captureViewModel = CaptureViewModel(source: source) { [weak self] event in
         self?.send(event)
@@ -29,17 +29,20 @@ public final class ScanCoordinator: Coordinator {
 
     private let analyzer: any MealAnalyzing
     private let catalog: FoodCatalog
+    private let store: any MealStoring
     private let now: () -> Date
 
     public init(
         source: ScanSource,
         analyzer: any MealAnalyzing,
         catalog: FoodCatalog,
+        store: any MealStoring,
         now: @escaping () -> Date = Date.init
     ) {
         self.source = source
         self.analyzer = analyzer
         self.catalog = catalog
+        self.store = store
         self.now = now
     }
 
@@ -100,10 +103,10 @@ public final class ScanCoordinator: Coordinator {
 
     private func handle(_ event: ReviewEvent) {
         switch event {
-        case .saveRequested(let draft):
-            guard savedDraft == nil else { return }
-            savedDraft = draft
-            parentCoordinator?.send(ScanEvent.mealSaved(draft))
+        case .saved(let meal):
+            guard savedMeal == nil else { return }
+            savedMeal = meal
+            parentCoordinator?.send(ScanEvent.mealSaved(meal))
             // Replacing the whole stack leaves nothing to go back to: the meal can't be saved twice.
             router.path = [.saved]
         }
@@ -123,6 +126,7 @@ public final class ScanCoordinator: Coordinator {
             suggestions: suggestions,
             photo: photo,
             catalog: catalog,
+            store: store,
             date: now()
         ) { [weak self] event in
             self?.send(event)

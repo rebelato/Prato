@@ -11,8 +11,8 @@ private struct UnrelatedEvent: Event {}
 @MainActor
 struct AppCoordinatorTests {
 
-    private func makeCoordinator() -> AppCoordinator {
-        AppCoordinator(analyzer: MockMealAnalyzer(delay: .zero), catalog: .development)
+    private func makeCoordinator(store: any MealStoring = InMemoryMealStore()) -> AppCoordinator {
+        AppCoordinator(analyzer: MockMealAnalyzer(delay: .zero), catalog: .development, store: store)
     }
 
     @Test func startsOnTodayWithNothingPresented() {
@@ -72,19 +72,28 @@ struct AppCoordinatorTests {
 
         #expect(coordinator.activeScan == nil)
         #expect(coordinator.childCoordinators.isEmpty)
-        #expect(coordinator.lastSavedMeal == nil)
     }
 
-    @Test func savedMealIsKeptWhileTheFlowStaysOpen() throws {
+    @Test func savedMealKeepsTheFlowOpenOnTheConfirmation() throws {
         let coordinator = makeCoordinator()
         coordinator.select(.scan)
         let scan = try #require(coordinator.activeScan)
-        let draft = MealDraft(kind: .lunch, portions: [], photo: nil, date: .now)
+        let meal = Meal(kind: .lunch, date: .now, portions: [], photo: nil)
 
-        scan.send(ScanEvent.mealSaved(draft))
+        scan.send(ScanEvent.mealSaved(meal))
 
-        #expect(coordinator.lastSavedMeal == draft)
         #expect(coordinator.activeScan === scan)
+    }
+
+    @Test func homeShowsMealsFromTheSameStoreAsTheScan() async throws {
+        let store = InMemoryMealStore()
+        let coordinator = makeCoordinator(store: store)
+        let rice = try #require(FoodCatalog.development.foods.first)
+        let meal = try await store.save(MealDraft(kind: .lunch, portions: [FoodPortion(food: rice, grams: 100)], photo: nil, date: .now))
+
+        await coordinator.homeViewModel.load()
+
+        #expect(coordinator.homeViewModel.todayMeals == [meal])
     }
 
     @Test func finishingScanClosesTheFlowAndShowsToday() throws {

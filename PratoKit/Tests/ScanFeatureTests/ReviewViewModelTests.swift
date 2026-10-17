@@ -20,12 +20,14 @@ struct ReviewViewModelTests {
 
     private func makeViewModel(
         suggestions: [FoodSuggestion] = MockMealAnalyzer().result,
+        store: any MealStoring = InMemoryMealStore(),
         onEvent: @escaping @MainActor (ReviewEvent) -> Void = { _ in }
     ) -> ReviewViewModel {
         ReviewViewModel(
             suggestions: suggestions,
             photo: nil,
             catalog: .development,
+            store: store,
             date: lunchTime,
             calendar: calendar,
             onEvent: onEvent
@@ -103,30 +105,43 @@ struct ReviewViewModelTests {
         #expect(!viewModel.portions.contains { $0.id == rice.id })
     }
 
-    @Test func cannotSaveAnEmptyMeal() {
+    @Test func cannotSaveAnEmptyMeal() async {
         var events: [ReviewEvent] = []
         let viewModel = makeViewModel(suggestions: []) { events.append($0) }
 
-        viewModel.saveTapped()
+        await viewModel.saveTapped()
 
         #expect(!viewModel.canSave)
         #expect(events.isEmpty)
     }
 
-    @Test func savingSendsTheDraft() throws {
+    @Test func savingSendsTheStoredMeal() async throws {
         var events: [ReviewEvent] = []
         let viewModel = makeViewModel { events.append($0) }
         viewModel.mealKind = .dinner
 
-        viewModel.saveTapped()
+        await viewModel.saveTapped()
 
-        guard case .saveRequested(let draft) = try #require(events.first) else {
-            Issue.record("Expected saveRequested")
+        guard case .saved(let meal) = try #require(events.first) else {
+            Issue.record("Expected saved")
             return
         }
-        #expect(draft.kind == .dinner)
-        #expect(draft.portions == viewModel.portions)
-        #expect(draft.date == lunchTime)
+        #expect(meal.kind == .dinner)
+        #expect(meal.portions == viewModel.portions)
+        #expect(meal.date == lunchTime)
+        #expect(!viewModel.canSave)
+        #expect(!viewModel.isSaving)
+    }
+
+    @Test func failedSaveShowsAnErrorAndCanRetry() async {
+        var events: [ReviewEvent] = []
+        let viewModel = makeViewModel(store: FailingStore()) { events.append($0) }
+
+        await viewModel.saveTapped()
+
+        #expect(viewModel.showsSaveError)
+        #expect(viewModel.canSave)
+        #expect(events.isEmpty)
     }
 }
 

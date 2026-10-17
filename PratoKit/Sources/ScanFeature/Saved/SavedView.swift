@@ -8,7 +8,7 @@ import SwiftUI
 /// the only exit is "Voltar para hoje".
 struct SavedView: View {
 
-    let draft: MealDraft
+    let meal: Meal
     let onEvent: @MainActor (SavedEvent) -> Void
 
     var body: some View {
@@ -29,22 +29,22 @@ struct SavedView: View {
                     .padding(.top, 24)
 
                 ScreenHeader(
-                    title: L10n.Saved.title(draft.kind),
-                    subtitle: L10n.Saved.loggedAt(draft.date.formatted(date: .omitted, time: .shortened))
+                    title: L10n.Saved.title(meal.kind),
+                    subtitle: L10n.Saved.loggedAt(meal.date.formatted(date: .omitted, time: .shortened))
                 )
                 .padding(.top, 8)
 
                 MacroSummaryCard(
-                    kcal: draft.totals.kcal,
-                    protein: draft.totals.protein,
-                    carbs: draft.totals.carbs,
-                    fat: draft.totals.fat,
-                    totalGrams: draft.portions.totalGrams
+                    kcal: meal.totals.kcal,
+                    protein: meal.totals.protein,
+                    carbs: meal.totals.carbs,
+                    fat: meal.totals.fat,
+                    totalGrams: meal.portions.totalGrams
                 )
                 .padding(.top, 24)
 
                 VStack(spacing: 0) {
-                    ForEach(draft.portions) { portion in
+                    ForEach(meal.portions) { portion in
                         PortionRow(portion: portion)
                         Divider()
                             .overlay(PratoColor.border)
@@ -76,6 +76,6 @@ struct SavedView: View {
         catalog.food(id: suggestion.foodID).map { FoodPortion(food: $0, grams: suggestion.grams) }
     }
     return NavigationStack {
-        SavedView(draft: MealDraft(kind: .lunch, portions: portions, photo: nil, date: .now)) { _ in }
+        SavedView(meal: Meal(kind: .lunch, date: .now, portions: portions, photo: nil)) { _ in }
     }
 }

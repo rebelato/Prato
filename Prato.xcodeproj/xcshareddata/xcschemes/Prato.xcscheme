@@ -70,6 +70,16 @@
                ReferencedContainer = "container:PratoKit">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "MealStoreTests"
+               BuildableName = "MealStoreTests"
+               BlueprintName = "MealStoreTests"
+               ReferencedContainer = "container:PratoKit">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
