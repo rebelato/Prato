@@ -16,13 +16,11 @@ public struct HomeView: View {
             VStack(alignment: .leading, spacing: 0) {
                 logo
                 header
-                    .padding(.top, 32)
+                    .padding(.top, 8)
                 scanCard
-                    .padding(.top, 32)
-                galleryButton
                     .padding(.top, 16)
                 today
-                    .padding(.top, 40)
+                    .padding(.top, 16)
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 16)
@@ -80,6 +78,8 @@ public struct HomeView: View {
                 Label(L10n.ScanCard.scanButton, systemImage: "viewfinder")
             }
             .buttonStyle(.pratoPrimary)
+            galleryButton
+                .padding(.top, 16)
         }
         .padding(24)
         .background(PratoColor.softSurface, in: .rect(cornerRadius: 28))
