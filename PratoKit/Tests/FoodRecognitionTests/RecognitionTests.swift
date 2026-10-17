@@ -131,42 +131,67 @@ struct CatalogMatcherTests {
         RecognizedFood(name: name, searchTerm: term ?? name, preparation: preparation, estimatedGrams: grams, alternatives: [])
     }
 
+    private func food(_ id: String) -> Food {
+        FoodCatalog.development.food(id: id)!
+    }
+
     @Test func namesMatchIgnoringCaseAccentsAndPreparationWords() {
-        #expect(matcher.match(recognized("Arroz Branco")) == .sure(FoodCatalog.development.food(id: "rice-white-cooked")!))
-        #expect(matcher.match(recognized("Feijão")) == .sure(FoodCatalog.development.food(id: "beans-carioca-cooked")!))
-        #expect(matcher.match(recognized("Frango grelhado", preparation: .grilled)) == .sure(FoodCatalog.development.food(id: "chicken-breast-grilled")!))
+        #expect(matcher.match(recognized("Arroz Branco")) == .sure(food("rice-white-cooked")))
+        #expect(matcher.match(recognized("Feijão")) == .sure(food("beans-carioca-cooked")))
+        #expect(matcher.match(recognized("Frango grelhado", preparation: .grilled)) == .sure(food("chicken-breast-grilled")))
+    }
+
+    @Test func preparationPicksTheMatchingVariant() {
+        #expect(matcher.match(recognized("Batata frita", term: "batata")) == .sure(food("potato-fried")))
+        #expect(matcher.match(recognized("Batata", preparation: .fried)) == .sure(food("potato-fried")))
+        #expect(matcher.match(recognized("Batata", preparation: .cooked)) == .sure(food("potato-boiled")))
+        #expect(matcher.match(recognized("Ovo frito", term: "ovo")) == .sure(food("egg-fried")))
     }
 
     @Test func differentPreparationIsNeverMatched() {
-        #expect(matcher.match(recognized("Batata frita", term: "batata")) == .none)
-        #expect(matcher.match(recognized("Batata", preparation: .fried)) == .none)
-        #expect(matcher.match(recognized("Ovo frito", term: "ovo")) == .none)
+        #expect(matcher.match(recognized("Batata", preparation: .roasted)) == .none)
+        #expect(matcher.match(recognized("Ovo", preparation: .roasted)) == .none)
+    }
+
+    @Test func sameFoodInSeveralPreparationsNeedsThePreparation() {
+        #expect(matcher.match(recognized("Batata")) == .none)
+        #expect(matcher.match(recognized("Ovo")) == .none)
     }
 
     @Test func genericTermOnlyIsOfferedForConfirmation() {
-        let beans = FoodCatalog.development.food(id: "beans-carioca-cooked")!
+        #expect(matcher.match(recognized("Feijão tropeiro", term: "feijao")) == .toConfirm(food("beans-carioca-cooked")))
+    }
 
-        #expect(matcher.match(recognized("Feijão preto", term: "feijao")) == .toConfirm(beans))
+    @Test func termInsideTheNameIsOfferedForConfirmation() {
+        let strips = food("beef-strips-sauteed")
+
+        #expect(matcher.match(recognized("Iscas de carne bovina", term: "carne bovina", preparation: .sauteed)) == .toConfirm(strips))
+        // Without a preparation, the longest term found in the name wins: "iscas de carne" over "carne bovina".
+        #expect(matcher.match(recognized("Iscas de carne bovina", term: "iscas de carne bovina")) == .toConfirm(strips))
+    }
+
+    @Test func mixedDishesAreNotGuessed() {
+        #expect(matcher.match(recognized("Arroz com feijão", term: "arroz com feijao")) == .none)
     }
 
     @Test func unknownFoodIsUnmatched() {
-        #expect(matcher.match(recognized("Farofa", term: "farofa")) == .none)
+        #expect(matcher.match(recognized("Moqueca", term: "moqueca")) == .none)
     }
 
     @Test func analysisSplitsMatchedAndUnmatchedAndKeepsWeights() {
         let analysis = matcher.analysis(for: [
             recognized("Arroz branco", grams: 150),
             recognized("Frango", preparation: .grilled),
-            recognized("Farofa", grams: 40),
-            recognized("Feijão preto", term: "feijao")
+            recognized("Moqueca", grams: 200),
+            recognized("Feijão tropeiro", term: "feijao")
         ])
 
         #expect(analysis.suggestions == [
             FoodSuggestion(foodID: "rice-white-cooked", grams: 150),
             FoodSuggestion(foodID: "chicken-breast-grilled", grams: CatalogMatcher.defaultGrams)
         ])
-        #expect(analysis.unmatched.map(\.name) == ["Farofa", "Feijão preto"])
-        #expect(analysis.unmatched[0].estimatedGrams == 40)
+        #expect(analysis.unmatched.map(\.name) == ["Moqueca", "Feijão tropeiro"])
+        #expect(analysis.unmatched[0].estimatedGrams == 200)
         #expect(analysis.unmatched[0].suggestedFoodID == nil)
         #expect(analysis.unmatched[1].suggestedFoodID == "beans-carioca-cooked")
     }

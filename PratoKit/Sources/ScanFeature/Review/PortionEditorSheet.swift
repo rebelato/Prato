@@ -58,7 +58,13 @@ struct PortionEditorSheet: View {
                     Text(L10n.Editor.recognizedAs(recognizedName))
                         .font(PratoFont.secondary)
                         .foregroundStyle(PratoColor.textSecondary)
-                        .padding(.bottom, 16)
+                    if !editor.alternatives.isEmpty {
+                        Text(L10n.Editor.couldBe(editor.alternatives.formatted(.list(type: .or))))
+                            .font(PratoFont.secondary)
+                            .foregroundStyle(PratoColor.textSecondary)
+                            .padding(.top, 4)
+                    }
+                    Spacer().frame(height: 16)
                 }
                 fieldLabel(L10n.Editor.food)
                 foodPicker
@@ -75,10 +81,12 @@ struct PortionEditorSheet: View {
                     .font(PratoFont.caption)
                     .foregroundStyle(PratoColor.textSecondary)
                     .padding(.top, 16)
-                Text(L10n.Editor.estimate(editor.totals.kcal))
-                    .font(PratoFont.bodyEmphasized.monospacedDigit())
-                    .foregroundStyle(PratoColor.textPrimary)
-                    .padding(.top, 4)
+                if let totals = editor.totals {
+                    Text(L10n.Editor.estimate(totals.kcal))
+                        .font(PratoFont.bodyEmphasized.monospacedDigit())
+                        .foregroundStyle(PratoColor.textPrimary)
+                        .padding(.top, 4)
+                }
 
                 Button(isAdding ? L10n.Editor.add : L10n.Editor.apply) { onApply(editor) }
                     .buttonStyle(.pratoPrimary)
@@ -106,22 +114,19 @@ struct PortionEditorSheet: View {
             .foregroundStyle(PratoColor.textSecondary)
     }
 
+    /// Opens the searchable food list; with no food chosen yet it asks for one.
     private var foodPicker: some View {
-        Menu {
-            Picker(selection: $editor.food) {
-                ForEach(catalog.foods) { food in
-                    Text(food.name()).tag(food)
-                }
-            } label: {
-                EmptyView()
+        NavigationLink {
+            FoodPickerView(catalog: catalog, hints: editor.searchHints, selection: editor.food) { food in
+                editor.food = food
             }
         } label: {
             HStack {
-                Text(editor.food.name())
+                Text(editor.food?.name() ?? L10n.Editor.chooseFood)
                     .font(PratoFont.body)
-                    .foregroundStyle(PratoColor.textPrimary)
+                    .foregroundStyle(editor.food == nil ? PratoColor.textSecondary : PratoColor.textPrimary)
                 Spacer()
-                Image(systemName: "chevron.up.chevron.down")
+                Image(systemName: "chevron.right")
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(PratoColor.textSecondary)
             }
@@ -133,8 +138,9 @@ struct PortionEditorSheet: View {
                     .strokeBorder(PratoColor.border, lineWidth: 1)
             }
         }
+        .buttonStyle(.plain)
         .accessibilityLabel(L10n.Editor.food)
-        .accessibilityValue(editor.food.name())
+        .accessibilityValue(editor.food?.name() ?? L10n.Editor.chooseFood)
     }
 
     /// Typing updates the estimate live; non-digits are ignored.
@@ -190,13 +196,26 @@ struct PortionEditorSheet: View {
     }
 }
 
-#Preview {
+#Preview("Ajustar") {
     Color.clear.sheet(isPresented: .constant(true)) {
         PortionEditorSheet(
             editor: PortionEditor(mode: .edit(UUID()), food: FoodCatalog.development.foods[1], grams: 150),
             catalog: .development,
             onApply: { _ in },
             onRemove: {},
+            onCancel: {}
+        )
+    }
+}
+
+#Preview("Confirmar alimento") {
+    Color.clear.sheet(isPresented: .constant(true)) {
+        PortionEditorSheet(
+            editor: PortionEditor(mode: .add, food: nil, grams: 120, recognizedName: "Iscas de carne bovina",
+                                  alternatives: ["Carne de panela", "Picadinho"]),
+            catalog: .development,
+            onApply: { _ in },
+            onRemove: nil,
             onCancel: {}
         )
     }

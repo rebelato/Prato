@@ -81,14 +81,3 @@ public enum RecognitionValidator {
         return String(collapsed.prefix(80))
     }
 }
-
-/// Lowercase, accent-free, single-spaced text for comparing food names.
-public enum TextNormalizer {
-    public static func normalize(_ text: String) -> String {
-        text
-            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "pt_BR"))
-            .components(separatedBy: CharacterSet.alphanumerics.inverted)
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
-    }
-}

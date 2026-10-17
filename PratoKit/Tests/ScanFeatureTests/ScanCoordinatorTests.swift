@@ -179,7 +179,9 @@ struct ScanCoordinatorTests {
         scan.send(CaptureEvent.skipPhotoRequested)
         let review = try #require(scan.reviewViewModel)
         review.addFoodTapped()
-        review.apply(try #require(review.editor))
+        var editor = try #require(review.editor)
+        editor.food = FoodCatalog.development.foods.first
+        review.apply(editor)
         return review
     }
 

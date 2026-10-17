@@ -102,6 +102,6 @@ Pontos para a política de privacidade e para a seção de privacidade da App St
 
 ## 7. Limitações conhecidas
 
-- O catálogo tem 12 alimentos com **valores de demonstração**, marcados como tal no app e gravados com essa origem em cada item. Antes de publicar, troque por uma base com fonte identificada (por exemplo, a TACO, depois de conferir as condições de uso).
-- Com um catálogo pequeno, muitos alimentos vão cair em **Confirme estes alimentos**. Isso é intencional: o app pergunta em vez de associar a um alimento diferente.
+- O catálogo tem 25 alimentos com **valores de demonstração**, marcados como tal no app e gravados com essa origem em cada item. Antes de publicar, troque por uma base com fonte identificada (por exemplo, a TACO, depois de conferir as condições de uso).
+- Com um catálogo pequeno, muitos alimentos vão cair em **Confirme estes alimentos**. Isso é intencional: o app pergunta em vez de associar a um alimento diferente. Ao confirmar, a lista de alimentos tem busca e mostra primeiro os parecidos com o nome reconhecido e as alternativas do Gemini; sem sugestão segura, nenhum alimento vem pré-selecionado.
 - A integração foi testada em 17/10/2026 com um projeto Firebase real (provedor Gemini Developer API, token de debug do App Check), num build de Debug. O caminho de Release com App Attest e o enforcement ligado ainda não foram exercitados.

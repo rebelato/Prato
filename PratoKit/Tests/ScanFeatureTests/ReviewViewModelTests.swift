@@ -76,14 +76,39 @@ struct ReviewViewModelTests {
         #expect(viewModel.portions[1].grams == 200)
     }
 
-    @Test func addingAppendsAFood() throws {
+    @Test func addingStartsWithNoFoodChosen() throws {
         let viewModel = makeViewModel()
 
         viewModel.addFoodTapped()
-        viewModel.apply(try #require(viewModel.editor))
+
+        let editor = try #require(viewModel.editor)
+        #expect(editor.food == nil)
+        #expect(!editor.canApply)
+        #expect(editor.totals == nil)
+    }
+
+    @Test func addingAppendsTheChosenFood() throws {
+        let viewModel = makeViewModel()
+        let egg = try #require(FoodCatalog.development.food(id: "egg-fried"))
+
+        viewModel.addFoodTapped()
+        var editor = try #require(viewModel.editor)
+        editor.food = egg
+        viewModel.apply(editor)
 
         #expect(viewModel.portions.count == 4)
+        #expect(viewModel.portions.last?.food == egg)
         #expect(viewModel.portions.last?.grams == 100)
+    }
+
+    @Test func applyingWithoutAFoodDoesNothing() throws {
+        let viewModel = makeViewModel()
+        viewModel.addFoodTapped()
+
+        viewModel.apply(try #require(viewModel.editor))
+
+        #expect(viewModel.portions.count == 3)
+        #expect(viewModel.editor != nil)
     }
 
     @Test func zeroGramsIsNotApplied() throws {
@@ -151,11 +176,13 @@ struct ReviewViewModelTests {
 struct UnmatchedFoodTests {
 
     private let farofa = UnmatchedFood(name: "Farofa", preparation: nil, estimatedGrams: 40, alternatives: [])
+    private let strips = UnmatchedFood(name: "Iscas de carne bovina", preparation: "refogado", estimatedGrams: 120,
+                                       alternatives: ["Carne de panela", "Picadinho"])
     private let blackBeans = UnmatchedFood(name: "Feijão preto", preparation: "cozido", estimatedGrams: 90,
                                            alternatives: [], suggestedFoodID: "beans-carioca-cooked")
 
     private func makeViewModel() -> ReviewViewModel {
-        ReviewViewModel(suggestions: [], unmatched: [farofa, blackBeans], photo: nil, catalog: .development,
+        ReviewViewModel(suggestions: [], unmatched: [farofa, blackBeans, strips], photo: nil, catalog: .development,
                         store: InMemoryMealStore(), date: .now) { _ in }
     }
 
@@ -165,20 +192,34 @@ struct UnmatchedFoodTests {
         viewModel.unmatchedTapped(blackBeans)
 
         let editor = try #require(viewModel.editor)
-        #expect(editor.food.id == "beans-carioca-cooked")
+        #expect(editor.food?.id == "beans-carioca-cooked")
         #expect(editor.grams == 90)
         #expect(editor.recognizedName == "Feijão preto")
+    }
+
+    @Test func withoutASuggestionNoFoodIsPreselected() throws {
+        let viewModel = makeViewModel()
+
+        viewModel.unmatchedTapped(strips)
+
+        let editor = try #require(viewModel.editor)
+        #expect(editor.food == nil)
+        #expect(editor.grams == 120)
+        #expect(editor.alternatives == ["Carne de panela", "Picadinho"])
+        #expect(editor.searchHints == ["Iscas de carne bovina", "Carne de panela", "Picadinho"])
     }
 
     @Test func applyingAddsThePortionAndResolvesTheItem() throws {
         let viewModel = makeViewModel()
         viewModel.unmatchedTapped(farofa)
+        var editor = try #require(viewModel.editor)
+        editor.food = try #require(FoodCatalog.development.food(id: "farofa"))
 
-        viewModel.apply(try #require(viewModel.editor))
+        viewModel.apply(editor)
 
         #expect(viewModel.portions.count == 1)
         #expect(viewModel.portions[0].grams == 40)
-        #expect(viewModel.unmatched == [blackBeans])
+        #expect(viewModel.unmatched == [blackBeans, strips])
         #expect(viewModel.canSave)
     }
 
@@ -188,7 +229,7 @@ struct UnmatchedFoodTests {
 
         viewModel.cancelEditing()
 
-        #expect(viewModel.unmatched.count == 2)
+        #expect(viewModel.unmatched.count == 3)
         #expect(viewModel.portions.isEmpty)
     }
 
@@ -197,7 +238,7 @@ struct UnmatchedFoodTests {
 
         viewModel.dismissUnmatched(farofa.id)
 
-        #expect(viewModel.unmatched == [blackBeans])
+        #expect(viewModel.unmatched == [blackBeans, strips])
     }
 
     @Test func onlyUnmatchedFoodsCannotBeSaved() {

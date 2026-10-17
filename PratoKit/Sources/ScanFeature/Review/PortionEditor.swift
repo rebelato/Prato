@@ -16,7 +16,8 @@ public struct PortionEditor: Identifiable, Hashable, Sendable {
 
     public let id: UUID
     public let mode: Mode
-    public var food: Food
+    /// The chosen food. Starts empty when nothing in the catalog is a safe guess, so the user picks.
+    public var food: Food?
     public var grams: Int {
         didSet { grams = min(max(grams, 0), Self.maxGrams) }
     }
@@ -24,13 +25,16 @@ public struct PortionEditor: Identifiable, Hashable, Sendable {
     public let resolves: UnmatchedFood.ID?
     /// The recognized name, shown so the user knows what they're picking a food for.
     public let recognizedName: String?
+    /// Other things the analysis said it could be. Shown, and used to rank the food list.
+    public let alternatives: [String]
 
     public init(
         mode: Mode,
-        food: Food,
+        food: Food?,
         grams: Int,
         resolves: UnmatchedFood.ID? = nil,
-        recognizedName: String? = nil
+        recognizedName: String? = nil,
+        alternatives: [String] = []
     ) {
         self.id = UUID()
         self.mode = mode
@@ -38,15 +42,21 @@ public struct PortionEditor: Identifiable, Hashable, Sendable {
         self.grams = min(max(grams, 0), Self.maxGrams)
         self.resolves = resolves
         self.recognizedName = recognizedName
+        self.alternatives = alternatives
     }
 
-    /// What the item will add to the meal with the current values.
-    public var totals: NutritionTotals {
-        NutritionTotals(food: food, grams: grams)
+    /// What the item will add to the meal with the current values, once a food is chosen.
+    public var totals: NutritionTotals? {
+        food.map { NutritionTotals(food: $0, grams: grams) }
+    }
+
+    /// Names to look for in the catalog: what was recognized, then its alternatives.
+    public var searchHints: [String] {
+        (recognizedName.map { [$0] } ?? []) + alternatives
     }
 
     public var canApply: Bool {
-        grams > 0
+        food != nil && grams > 0
     }
 
     public mutating func adjustGrams(by delta: Int) {
