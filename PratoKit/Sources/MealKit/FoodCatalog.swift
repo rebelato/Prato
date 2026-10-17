@@ -76,7 +76,20 @@ extension FoodCatalog {
             demo("tomato", "Tomate", "Tomato", kcal: 15, protein: 1.1, carbs: 3.1, fat: 0.2),
             demo("banana", "Banana", "Banana", kcal: 98, protein: 1.3, carbs: 26.0, fat: 0.1),
             demo("french-bread", "Pão francês", "French bread", kcal: 300, protein: 8.0, carbs: 58.6, fat: 3.1),
-            demo("minas-cheese", "Queijo minas frescal", "Fresh white cheese", kcal: 264, protein: 17.4, carbs: 3.2, fat: 20.2)
+            demo("minas-cheese", "Queijo minas frescal", "Fresh white cheese", kcal: 264, protein: 17.4, carbs: 3.2, fat: 20.2),
+            demo("rice-brown-cooked", "Arroz integral", "Brown rice", kcal: 124, protein: 2.6, carbs: 25.8, fat: 1.0),
+            demo("beans-black-cooked", "Feijão preto", "Black beans", kcal: 77, protein: 4.5, carbs: 14.0, fat: 0.5),
+            demo("beef-strips-sauteed", "Iscas de carne refogadas", "Sautéed beef strips", kcal: 200, protein: 29.0, carbs: 1.0, fat: 8.5),
+            demo("beef-pot-roast", "Carne de panela", "Pot roast beef", kcal: 215, protein: 27.3, carbs: 0, fat: 10.9),
+            demo("ground-beef-sauteed", "Carne moída refogada", "Sautéed ground beef", kcal: 212, protein: 26.7, carbs: 0, fat: 10.9),
+            demo("chicken-shredded", "Frango desfiado", "Shredded chicken", kcal: 163, protein: 31.5, carbs: 0, fat: 3.2),
+            demo("sausage-grilled", "Linguiça grelhada", "Grilled sausage", kcal: 296, protein: 23.2, carbs: 0, fat: 21.9),
+            demo("egg-fried", "Ovo frito", "Fried egg", kcal: 240, protein: 15.6, carbs: 1.2, fat: 18.6),
+            demo("potato-fried", "Batata frita", "French fries", kcal: 267, protein: 5.0, carbs: 35.6, fat: 13.1),
+            demo("cassava-boiled", "Mandioca cozida", "Boiled cassava", kcal: 125, protein: 0.6, carbs: 30.1, fat: 0.3),
+            demo("farofa", "Farofa", "Toasted cassava flour", kcal: 406, protein: 2.1, carbs: 80.3, fat: 9.1),
+            demo("collard-greens-sauteed", "Couve refogada", "Sautéed collard greens", kcal: 90, protein: 1.7, carbs: 8.7, fat: 6.6),
+            demo("cheese-bread", "Pão de queijo", "Cheese bread", kcal: 363, protein: 5.1, carbs: 34.2, fat: 24.6)
         ],
         searchInfo: [
             "rice-white-cooked": FoodSearchInfo(terms: ["arroz", "arroz branco", "white rice", "rice"], preparation: .cooked),
@@ -90,7 +103,20 @@ extension FoodCatalog {
             "tomato": FoodSearchInfo(terms: ["tomate", "tomato"], preparation: .raw),
             "banana": FoodSearchInfo(terms: ["banana"], preparation: .raw),
             "french-bread": FoodSearchInfo(terms: ["pao", "pao frances", "bread", "french bread"]),
-            "minas-cheese": FoodSearchInfo(terms: ["queijo", "queijo minas", "queijo branco", "cheese", "white cheese"])
+            "minas-cheese": FoodSearchInfo(terms: ["queijo", "queijo minas", "queijo branco", "cheese", "white cheese"]),
+            "rice-brown-cooked": FoodSearchInfo(terms: ["arroz integral", "brown rice"], preparation: .cooked),
+            "beans-black-cooked": FoodSearchInfo(terms: ["feijao preto", "black beans"], preparation: .cooked),
+            "beef-strips-sauteed": FoodSearchInfo(terms: ["iscas", "iscas de carne", "tiras de carne", "carne em tiras", "carne acebolada", "beef strips"], preparation: .sauteed),
+            "beef-pot-roast": FoodSearchInfo(terms: ["carne de panela", "carne cozida", "carne ensopada", "picadinho", "pot roast", "beef stew"], preparation: .cooked),
+            "ground-beef-sauteed": FoodSearchInfo(terms: ["carne moida", "ground beef"], preparation: .sauteed),
+            "chicken-shredded": FoodSearchInfo(terms: ["frango desfiado", "shredded chicken"], preparation: .cooked),
+            "sausage-grilled": FoodSearchInfo(terms: ["linguica", "sausage"], preparation: .grilled),
+            "egg-fried": FoodSearchInfo(terms: ["ovo frito", "fried egg"], preparation: .fried),
+            "potato-fried": FoodSearchInfo(terms: ["batata frita", "fritas", "french fries", "fries"], preparation: .fried),
+            "cassava-boiled": FoodSearchInfo(terms: ["mandioca", "aipim", "macaxeira", "cassava", "yuca"], preparation: .cooked),
+            "farofa": FoodSearchInfo(terms: ["farofa", "cassava flour"]),
+            "collard-greens-sauteed": FoodSearchInfo(terms: ["couve", "couve refogada", "collard greens", "kale"], preparation: .sauteed),
+            "cheese-bread": FoodSearchInfo(terms: ["pao de queijo", "cheese bread"], preparation: .roasted)
         ]
     )
 

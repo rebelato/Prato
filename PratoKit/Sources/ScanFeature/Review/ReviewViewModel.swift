@@ -62,20 +62,21 @@ public final class ReviewViewModel {
         editor = PortionEditor(mode: .edit(portion.id), food: portion.food, grams: portion.grams)
     }
 
+    /// Opens the add sheet with no food chosen: the user picks one from the catalog.
     public func addFoodTapped() {
-        guard let first = catalog.foods.first else { return }
-        editor = PortionEditor(mode: .add, food: first, grams: 100)
+        editor = PortionEditor(mode: .add, food: nil, grams: 100)
     }
 
-    /// Opens the add sheet for a food the analysis couldn't match, starting from its suggestion.
+    /// Opens the add sheet for a food the analysis couldn't match. It starts from the suggested
+    /// catalog food when there is one, and otherwise with no food, never an unrelated default.
     public func unmatchedTapped(_ item: UnmatchedFood) {
-        guard let food = item.suggestedFoodID.flatMap(catalog.food(id:)) ?? catalog.foods.first else { return }
         editor = PortionEditor(
             mode: .add,
-            food: food,
+            food: item.suggestedFoodID.flatMap(catalog.food(id:)),
             grams: item.estimatedGrams ?? 100,
             resolves: item.id,
-            recognizedName: item.name
+            recognizedName: item.name,
+            alternatives: item.alternatives
         )
     }
 
@@ -85,16 +86,16 @@ public final class ReviewViewModel {
     }
 
     public func apply(_ editor: PortionEditor) {
-        guard editor.canApply else { return }
+        guard editor.canApply, let food = editor.food else { return }
         switch editor.mode {
         case .add:
-            portions.append(FoodPortion(food: editor.food, grams: editor.grams))
+            portions.append(FoodPortion(food: food, grams: editor.grams))
             if let resolved = editor.resolves {
                 unmatched.removeAll { $0.id == resolved }
             }
         case .edit(let id):
             if let index = portions.firstIndex(where: { $0.id == id }) {
-                portions[index].food = editor.food
+                portions[index].food = food
                 portions[index].grams = editor.grams
             }
         }

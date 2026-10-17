@@ -185,6 +185,12 @@ enum L10n {
         static func recognizedAs(_ name: String) -> String {
             String(localized: "editor.recognizedAs", defaultValue: "Reconhecido na foto como “\(name)”.", bundle: .module, comment: "Which recognized food the user is picking a catalog food for; the argument is its name")
         }
+        static var chooseFood: String {
+            String(localized: "editor.chooseFood", defaultValue: "Escolher alimento", bundle: .module, comment: "Food field before a food is chosen; opens the food list")
+        }
+        static func couldBe(_ foods: String) -> String {
+            String(localized: "editor.couldBe", defaultValue: "Também pode ser: \(foods).", bundle: .module, comment: "Alternatives the analysis gave for the recognized food; the argument is a list of names")
+        }
         static func estimate(_ kcal: Int) -> String {
             String(localized: "editor.estimate", defaultValue: "Estimativa: \(kcal) kcal", bundle: .module, comment: "Live calorie estimate of the portion; the argument is the number")
         }
@@ -192,6 +198,30 @@ enum L10n {
             grams > 0
                 ? String(localized: "editor.step.add", defaultValue: "Mais \(grams) gramas", bundle: .module, comment: "Accessibility label of a button that adds grams")
                 : String(localized: "editor.step.remove", defaultValue: "Menos \(-grams) gramas", bundle: .module, comment: "Accessibility label of a button that removes grams")
+        }
+    }
+
+    enum Picker {
+        static var title: String {
+            String(localized: "picker.title", defaultValue: "Escolher alimento", bundle: .module, comment: "Title of the searchable food list")
+        }
+        static var searchPrompt: String {
+            String(localized: "picker.searchPrompt", defaultValue: "Buscar alimento", bundle: .module, comment: "Placeholder of the food search field")
+        }
+        static var similar: String {
+            String(localized: "picker.similar", defaultValue: "Parecidos com o reconhecido", bundle: .module, comment: "Section of foods similar to the one recognized in the photo")
+        }
+        static var all: String {
+            String(localized: "picker.all", defaultValue: "Todos os alimentos", bundle: .module, comment: "Section with the whole food catalog")
+        }
+        static var emptyTitle: String {
+            String(localized: "picker.emptyTitle", defaultValue: "Nenhum alimento encontrado", bundle: .module, comment: "Shown when the search finds no food")
+        }
+        static var emptyHint: String {
+            String(localized: "picker.emptyHint", defaultValue: "A base de alimentos ainda é pequena. Tente outro nome ou escolha o mais parecido.", bundle: .module, comment: "Explains why a search found nothing")
+        }
+        static func per100g(_ kcal: String) -> String {
+            String(localized: "picker.per100g", defaultValue: "\(kcal) a cada 100 g", bundle: .module, comment: "Calories per 100 g of a food in the list; the argument is like '128 kcal'")
         }
     }
 

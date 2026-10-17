@@ -562,6 +562,40 @@
         }
       }
     },
+    "editor.chooseFood": {
+      "comment": "Food field before a food is chosen; opens the food list",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher alimento"
+          }
+        }
+      }
+    },
+    "editor.couldBe": {
+      "comment": "Alternatives the analysis gave for the recognized food; the argument is a list of names",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It could also be: %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Também pode ser: %@."
+          }
+        }
+      }
+    },
     "editor.estimate": {
       "comment": "Live calorie estimate of the portion; the argument is the number",
       "localizations": {
@@ -694,6 +728,125 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peso da porção em gramas"
+          }
+        }
+      }
+    },
+    "picker.all": {
+      "comment": "Section with the whole food catalog",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All foods"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos os alimentos"
+          }
+        }
+      }
+    },
+    "picker.emptyHint": {
+      "comment": "Explains why a search found nothing",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The food list is still small. Try another name or pick the closest one."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A base de alimentos ainda é pequena. Tente outro nome ou escolha o mais parecido."
+          }
+        }
+      }
+    },
+    "picker.emptyTitle": {
+      "comment": "Shown when the search finds no food",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No foods found"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum alimento encontrado"
+          }
+        }
+      }
+    },
+    "picker.per100g": {
+      "comment": "Calories per 100 g of a food in the list; the argument is like '128 kcal'",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per 100 g"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a cada 100 g"
+          }
+        }
+      }
+    },
+    "picker.searchPrompt": {
+      "comment": "Placeholder of the food search field",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search foods"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar alimento"
+          }
+        }
+      }
+    },
+    "picker.similar": {
+      "comment": "Section of foods similar to the one recognized in the photo",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Similar to what was recognized"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parecidos com o reconhecido"
+          }
+        }
+      }
+    },
+    "picker.title": {
+      "comment": "Title of the searchable food list",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher alimento"
           }
         }
       }
