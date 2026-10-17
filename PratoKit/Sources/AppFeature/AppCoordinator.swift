@@ -1,4 +1,5 @@
 import Coordinator
+import HistoryFeature
 import HomeFeature
 import MealKit
 import MealStore
@@ -21,6 +22,10 @@ public final class AppCoordinator: Coordinator {
     public let router = Router<AppRoute>()
 
     @ObservationIgnored public private(set) lazy var homeViewModel = HomeViewModel(store: store) { [weak self] event in
+        self?.send(event)
+    }
+
+    @ObservationIgnored public private(set) lazy var historyViewModel = HistoryViewModel(store: store) { [weak self] event in
         self?.send(event)
     }
 
@@ -79,11 +84,21 @@ public final class AppCoordinator: Coordinator {
             }
             return true
 
+        case let event as HistoryEvent:
+            switch event {
+            case .scanRequested:
+                startScan(from: .camera)
+            }
+            return true
+
         case let event as ScanEvent:
             switch event {
             case .mealSaved:
-                // Refresh Hoje while the confirmation is on screen, so it's ready when the flow closes.
-                Task { await homeViewModel.load() }
+                // Refresh both tabs while the confirmation is on screen, so they're ready when the flow closes.
+                Task {
+                    await homeViewModel.load()
+                    await historyViewModel.load()
+                }
             case .finished:
                 selectedTab = .today
                 closeScan()

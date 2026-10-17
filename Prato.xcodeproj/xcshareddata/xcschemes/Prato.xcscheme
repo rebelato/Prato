@@ -80,6 +80,16 @@
                ReferencedContainer = "container:PratoKit">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "HistoryFeatureTests"
+               BuildableName = "HistoryFeatureTests"
+               BlueprintName = "HistoryFeatureTests"
+               ReferencedContainer = "container:PratoKit">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

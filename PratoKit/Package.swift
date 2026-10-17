@@ -18,7 +18,10 @@ let package = Package(
             name: "DesignSystem",
             resources: [.process("Resources")]
         ),
-        .target(name: "MealKit"),
+        .target(
+            name: "MealKit",
+            resources: [.process("Resources")]
+        ),
         .target(
             name: "MealStore",
             dependencies: ["MealKit"]
@@ -42,12 +45,22 @@ let package = Package(
             resources: [.process("Resources")]
         ),
         .target(
+            name: "HistoryFeature",
+            dependencies: [
+                "DesignSystem",
+                "MealKit",
+                .product(name: "Coordinator", package: "CoordinatorFramework")
+            ],
+            resources: [.process("Resources")]
+        ),
+        .target(
             name: "AppFeature",
             dependencies: [
                 "DesignSystem",
                 "MealKit",
                 "MealStore",
                 "HomeFeature",
+                "HistoryFeature",
                 "ScanFeature",
                 .product(name: "Coordinator", package: "CoordinatorFramework")
             ],
@@ -66,6 +79,10 @@ let package = Package(
             dependencies: ["HomeFeature", "MealKit"]
         ),
         .testTarget(
+            name: "HistoryFeatureTests",
+            dependencies: ["HistoryFeature", "MealKit"]
+        ),
+        .testTarget(
             name: "ScanFeatureTests",
             dependencies: [
                 "ScanFeature",
@@ -78,6 +95,7 @@ let package = Package(
             dependencies: [
                 "AppFeature",
                 "HomeFeature",
+                "HistoryFeature",
                 "ScanFeature",
                 "MealKit",
                 .product(name: "Coordinator", package: "CoordinatorFramework")

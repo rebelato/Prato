@@ -1,6 +1,6 @@
 import Foundation
 
-/// Texts of the tab bar and the temporary screens, read from this module's `Localizable.xcstrings`.
+/// Texts of the tab bar, read from this module's `Localizable.xcstrings`.
 enum L10n {
     enum Tab {
         static var today: String {
@@ -11,16 +11,6 @@ enum L10n {
         }
         static var history: String {
             String(localized: "tab.history", defaultValue: "Histórico", bundle: .module, comment: "Tab bar item for past meals")
-        }
-    }
-
-
-    enum HistoryPlaceholder {
-        static var title: String {
-            String(localized: "history.placeholder.title", defaultValue: "Histórico", bundle: .module, comment: "Title of the temporary history screen")
-        }
-        static var subtitle: String {
-            String(localized: "history.placeholder.subtitle", defaultValue: "Em breve: seus registros, dia a dia.", bundle: .module, comment: "The history screen is not built yet")
         }
     }
 }

@@ -25,8 +25,9 @@ PratoKit/
     MealKit/              domínio: alimentos, porções, regra de arredondamento, MealAnalyzing + mock
     MealStore/            diário em SwiftData (SwiftDataMealStore), com cópia dos valores de cada alimento
     HomeFeature/          tela Hoje: HomeView, HomeViewModel, HomeEvent
+    HistoryFeature/       tela Histórico: semana, dia selecionado, totais e média
     ScanFeature/          fluxo de registro: câmera, conferir foto, análise, revisão e ajuste de porção
-    AppFeature/           AppCoordinator, tab bar e telas provisórias
+    AppFeature/           AppCoordinator e tab bar
   Tests/                  Swift Testing, um alvo por módulo
 ```
 

@@ -1,40 +1,6 @@
 {
   "sourceLanguage": "pt-BR",
   "strings": {
-    "history.placeholder.subtitle": {
-      "comment": "The history screen is not built yet",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Coming soon: your meals, day by day."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Em breve: seus registros, dia a dia."
-          }
-        }
-      }
-    },
-    "history.placeholder.title": {
-      "comment": "Title of the temporary history screen",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "History"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Histórico"
-          }
-        }
-      }
-    },
     "tab.history": {
       "comment": "Tab bar item for past meals",
       "localizations": {

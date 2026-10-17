@@ -95,14 +95,14 @@ struct ReviewView: View {
             Menu {
                 Picker(selection: $viewModel.mealKind) {
                     ForEach(MealKind.allCases, id: \.self) { kind in
-                        Text(L10n.mealKind(kind)).tag(kind)
+                        Text(kind.localizedName).tag(kind)
                     }
                 } label: {
                     EmptyView()
                 }
             } label: {
                 HStack {
-                    Text(L10n.mealKind(viewModel.mealKind))
+                    Text(viewModel.mealKind.localizedName)
                         .font(PratoFont.body)
                         .foregroundStyle(PratoColor.textPrimary)
                     Spacer()
@@ -119,7 +119,7 @@ struct ReviewView: View {
                 }
             }
             .accessibilityLabel(L10n.Review.mealKind)
-            .accessibilityValue(L10n.mealKind(viewModel.mealKind))
+            .accessibilityValue(viewModel.mealKind.localizedName)
         }
     }
 

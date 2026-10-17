@@ -47,17 +47,4 @@ enum L10n {
             String(localized: "home.today.mealCount", defaultValue: "\(count) refeições", bundle: .module, comment: "How many meals were logged today; plural by the number")
         }
     }
-
-    static func mealKind(_ kind: MealKind) -> String {
-        switch kind {
-        case .breakfast:
-            String(localized: "mealKind.breakfast", defaultValue: "Café da manhã", bundle: .module, comment: "Meal type")
-        case .lunch:
-            String(localized: "mealKind.lunch", defaultValue: "Almoço", bundle: .module, comment: "Meal type")
-        case .snack:
-            String(localized: "mealKind.snack", defaultValue: "Lanche", bundle: .module, comment: "Meal type")
-        case .dinner:
-            String(localized: "mealKind.dinner", defaultValue: "Jantar", bundle: .module, comment: "Meal type")
-        }
-    }
 }
