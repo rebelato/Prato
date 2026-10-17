@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "pt-BR",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "App name under the icon",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prato"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prato"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
