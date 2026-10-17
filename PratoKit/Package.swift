@@ -20,6 +20,10 @@ let package = Package(
         ),
         .target(name: "MealKit"),
         .target(
+            name: "MealStore",
+            dependencies: ["MealKit"]
+        ),
+        .target(
             name: "HomeFeature",
             dependencies: [
                 "DesignSystem",
@@ -42,6 +46,7 @@ let package = Package(
             dependencies: [
                 "DesignSystem",
                 "MealKit",
+                "MealStore",
                 "HomeFeature",
                 "ScanFeature",
                 .product(name: "Coordinator", package: "CoordinatorFramework")
@@ -51,6 +56,10 @@ let package = Package(
         .testTarget(
             name: "MealKitTests",
             dependencies: ["MealKit"]
+        ),
+        .testTarget(
+            name: "MealStoreTests",
+            dependencies: ["MealStore", "MealKit"]
         ),
         .testTarget(
             name: "HomeFeatureTests",

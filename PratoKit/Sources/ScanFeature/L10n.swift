@@ -113,6 +113,9 @@ enum L10n {
         static var save: String {
             String(localized: "review.save", defaultValue: "Salvar refeição", bundle: .module, comment: "Saves the reviewed meal")
         }
+        static var saveFailed: String {
+            String(localized: "review.saveFailed", defaultValue: "Não foi possível salvar a refeição. Tente de novo.", bundle: .module, comment: "Saving the meal failed")
+        }
         static var itemHint: String {
             String(localized: "review.item.hint", defaultValue: "Toque para ajustar.", bundle: .module, comment: "Accessibility hint on a food row")
         }

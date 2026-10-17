@@ -1,176 +1,285 @@
 {
-  "sourceLanguage" : "pt-BR",
-  "strings" : {
-    "home.eyebrow" : {
-      "comment" : "Small label above the title on Hoje",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your food diary"
+  "sourceLanguage": "pt-BR",
+  "strings": {
+    "home.eyebrow": {
+      "comment": "Small label above the title on Hoje",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your food diary"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seu diário alimentar"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu diário alimentar"
           }
         }
       }
     },
-    "home.galleryButton" : {
-      "comment" : "Button that picks a meal photo from the photo library",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose from Library"
+    "home.galleryButton": {
+      "comment": "Button that picks a meal photo from the photo library",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose from Library"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escolher da galeria"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher da galeria"
           }
         }
       }
     },
-    "home.scanCard.scanButton" : {
-      "comment" : "Button that opens the camera",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scan Meal"
+    "home.scanCard.scanButton": {
+      "comment": "Button that opens the camera",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan Meal"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escanear refeição"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanear refeição"
           }
         }
       }
     },
-    "home.scanCard.subtitle" : {
-      "comment" : "How scanning works, on the scan card",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Snap, review and log. You adjust the portions."
+    "home.scanCard.subtitle": {
+      "comment": "How scanning works, on the scan card",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snap, review and log. You adjust the portions."
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fotografe, confira e registre. Você ajusta as porções."
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografe, confira e registre. Você ajusta as porções."
           }
         }
       }
     },
-    "home.scanCard.title" : {
-      "comment" : "Title of the card that starts a scan",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "What's on your plate?"
+    "home.scanCard.title": {
+      "comment": "Title of the card that starts a scan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's on your plate?"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O que tem no prato?"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que tem no prato?"
           }
         }
       }
     },
-    "home.subtitle" : {
-      "comment" : "Text under the main title on Hoje",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Understand what you eat, one meal at a time."
+    "home.subtitle": {
+      "comment": "Text under the main title on Hoje",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Understand what you eat, one meal at a time."
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entenda o que você come, uma refeição de cada vez."
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entenda o que você come, uma refeição de cada vez."
           }
         }
       }
     },
-    "home.title" : {
-      "comment" : "Main title on Hoje, two lines",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "One photo.\nYour plate, made clear."
+    "home.title": {
+      "comment": "Main title on Hoje, two lines",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One photo.\nYour plate, made clear."
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uma foto.\nSeu prato, mais claro."
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma foto.\nSeu prato, mais claro."
           }
         }
       }
     },
-    "home.today.empty.subtitle" : {
-      "comment" : "Encouragement under the empty state",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your next plate starts here."
+    "home.today.empty.subtitle": {
+      "comment": "Encouragement under the empty state",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your next plate starts here."
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seu próximo prato começa por aqui."
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu próximo prato começa por aqui."
           }
         }
       }
     },
-    "home.today.empty.title" : {
-      "comment" : "Today has no meals yet",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No meals logged yet"
+    "home.today.empty.title": {
+      "comment": "Today has no meals yet",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No meals logged yet"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhuma refeição registrada"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma refeição registrada"
           }
         }
       }
     },
-    "home.today.title" : {
-      "comment" : "Section with today's meals",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Today"
+    "home.today.mealCount": {
+      "comment": "How many meals were logged today; plural by the number",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld meal"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld meals"
+                }
+              }
+            }
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hoje"
+        "pt-BR": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld refeição"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld refeições"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "home.today.title": {
+      "comment": "Section with today's meals",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoje"
+          }
+        }
+      }
+    },
+    "mealKind.breakfast": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breakfast"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café da manhã"
+          }
+        }
+      }
+    },
+    "mealKind.dinner": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinner"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jantar"
+          }
+        }
+      }
+    },
+    "mealKind.lunch": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lunch"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Almoço"
+          }
+        }
+      }
+    },
+    "mealKind.snack": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snack"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lanche"
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

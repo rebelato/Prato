@@ -4,9 +4,8 @@ import MealKit
 
 /// What the scan flow reports to whoever presented it.
 public enum ScanEvent: Event {
-    /// The user reviewed the meal and tapped "Salvar refeição". The flow stays open on
-    /// the confirmation screen; the parent should store the meal now.
-    case mealSaved(MealDraft)
+    /// The meal was saved to the diary. The flow stays open on the confirmation screen.
+    case mealSaved(Meal)
     /// The user tapped "Voltar para hoje" after saving. The parent closes the flow.
     case finished
     /// The user closed the flow without saving.
@@ -45,7 +44,8 @@ enum AnalyzingEvent: Event {
 }
 
 enum ReviewEvent: Event {
-    case saveRequested(MealDraft)
+    /// "Salvar refeição" succeeded.
+    case saved(Meal)
 }
 
 enum SavedEvent: Event {

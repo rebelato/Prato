@@ -48,16 +48,28 @@ struct ReviewView: View {
             .padding(.bottom, 24)
         }
         .safeAreaInset(edge: .bottom) {
-            Button(L10n.Review.save) { viewModel.saveTapped() }
-                .buttonStyle(.pratoPrimary)
-                .disabled(!viewModel.canSave)
-                .opacity(viewModel.canSave ? 1 : 0.4)
+            Button {
+                Task { await viewModel.saveTapped() }
+            } label: {
+                if viewModel.isSaving {
+                    ProgressView()
+                        .tint(PratoColor.onPrimaryButton)
+                } else {
+                    Text(L10n.Review.save)
+                }
+            }
+            .buttonStyle(.pratoPrimary)
+            .disabled(!viewModel.canSave)
+            .opacity(viewModel.canSave || viewModel.isSaving ? 1 : 0.4)
                 .padding(.horizontal, 24)
                 .padding(.top, 12)
                 .padding(.bottom, 8)
                 .background(PratoColor.background)
         }
         .scanScreenChrome()
+        .alert(L10n.Review.saveFailed, isPresented: $viewModel.showsSaveError) {
+            Button(L10n.Common.ok, role: .cancel) {}
+        }
         .sheet(item: $viewModel.editor) { editor in
             PortionEditorSheet(
                 editor: editor,
@@ -142,6 +154,7 @@ struct ReviewView: View {
             suggestions: MockMealAnalyzer().result,
             photo: nil,
             catalog: .development,
+            store: InMemoryMealStore(),
             date: .now
         ) { _ in })
     }

@@ -34,8 +34,8 @@ public struct ScanFlowView: View {
                 ReviewView(viewModel: viewModel)
             }
         case .saved:
-            if let draft = coordinator.savedDraft {
-                SavedView(draft: draft) { coordinator.send($0) }
+            if let meal = coordinator.savedMeal {
+                SavedView(meal: meal) { coordinator.send($0) }
             }
         }
     }

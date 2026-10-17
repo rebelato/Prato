@@ -23,6 +23,7 @@ PratoKit/
   Sources/
     DesignSystem/         cores (claro e escuro), tipografia, botões, ilustração do prato, card de macros
     MealKit/              domínio: alimentos, porções, regra de arredondamento, MealAnalyzing + mock
+    MealStore/            diário em SwiftData (SwiftDataMealStore), com cópia dos valores de cada alimento
     HomeFeature/          tela Hoje: HomeView, HomeViewModel, HomeEvent
     ScanFeature/          fluxo de registro: câmera, conferir foto, análise, revisão e ajuste de porção
     AppFeature/           AppCoordinator, tab bar e telas provisórias

@@ -11,11 +11,15 @@ public final class ReviewViewModel {
     public private(set) var portions: [FoodPortion]
     /// The item open in the edit sheet, if any.
     public var editor: PortionEditor?
+    public private(set) var isSaving = false
+    public var showsSaveError = false
 
     public let catalog: FoodCatalog
     public let photo: Data?
 
     private let date: Date
+    private let store: any MealStoring
+    private var savedMeal: Meal?
     private let onEvent: @MainActor (ReviewEvent) -> Void
 
     /// - Parameters:
@@ -25,6 +29,7 @@ public final class ReviewViewModel {
         suggestions: [FoodSuggestion],
         photo: Data?,
         catalog: FoodCatalog,
+        store: any MealStoring,
         date: Date,
         calendar: Calendar = .current,
         onEvent: @escaping @MainActor (ReviewEvent) -> Void
@@ -36,12 +41,13 @@ public final class ReviewViewModel {
         self.catalog = catalog
         self.photo = photo
         self.date = date
+        self.store = store
         self.onEvent = onEvent
     }
 
     public var totals: NutritionTotals { portions.totals }
     public var totalGrams: Int { portions.totalGrams }
-    public var canSave: Bool { !portions.isEmpty }
+    public var canSave: Bool { !portions.isEmpty && !isSaving && savedMeal == nil }
 
     public func portionTapped(_ portion: FoodPortion) {
         editor = PortionEditor(mode: .edit(portion.id), food: portion.food, grams: portion.grams)
@@ -75,8 +81,19 @@ public final class ReviewViewModel {
         editor = nil
     }
 
-    public func saveTapped() {
+    /// Saves the meal to the diary. On failure the user stays here and sees an alert.
+    public func saveTapped() async {
         guard canSave else { return }
-        onEvent(.saveRequested(MealDraft(kind: mealKind, portions: portions, photo: photo, date: date)))
+        isSaving = true
+        defer { isSaving = false }
+
+        let draft = MealDraft(kind: mealKind, portions: portions, photo: photo, date: date)
+        do {
+            let meal = try await store.save(draft)
+            savedMeal = meal
+            onEvent(.saved(meal))
+        } catch {
+            showsSaveError = true
+        }
     }
 }

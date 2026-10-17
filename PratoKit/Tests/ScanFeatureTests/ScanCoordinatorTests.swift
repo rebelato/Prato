@@ -23,14 +23,23 @@ private struct FailingAnalyzer: MealAnalyzing {
     func analyze(photo: Data) async throws -> [FoodSuggestion] { throw Failure() }
 }
 
+struct FailingStore: MealStoring {
+    struct Failure: Error {}
+    func save(_ draft: MealDraft) async throws -> Meal { throw Failure() }
+    func meals(in interval: DateInterval) async throws -> [Meal] { throw Failure() }
+}
+
 @MainActor
 struct ScanCoordinatorTests {
 
     private let photo = Data([0xFF, 0xD8, 0xFF])
 
-    private func makeFlow(analyzer: any MealAnalyzing = MockMealAnalyzer(delay: .zero)) -> (ScanCoordinator, ParentSpy) {
+    private func makeFlow(
+        analyzer: any MealAnalyzing = MockMealAnalyzer(delay: .zero),
+        store: any MealStoring = InMemoryMealStore()
+    ) -> (ScanCoordinator, ParentSpy) {
         let parent = ParentSpy()
-        let scan = ScanCoordinator(source: .camera, analyzer: analyzer, catalog: .development)
+        let scan = ScanCoordinator(source: .camera, analyzer: analyzer, catalog: .development, store: store)
         parent.addChild(scan)
         return (scan, parent)
     }
@@ -108,44 +117,61 @@ struct ScanCoordinatorTests {
         #expect(review.photo == nil)
     }
 
-    @Test func savingReportsTheMealAndShowsTheConfirmation() throws {
-        let (scan, parent) = makeFlow()
+    /// Opens an empty review and adds one food, ready to save.
+    private func reviewWithOneFood(_ scan: ScanCoordinator) throws -> ReviewViewModel {
         scan.send(CaptureEvent.skipPhotoRequested)
         let review = try #require(scan.reviewViewModel)
         review.addFoodTapped()
         review.apply(try #require(review.editor))
+        return review
+    }
 
-        review.saveTapped()
+    @Test func savingStoresTheMealAndShowsTheConfirmation() async throws {
+        let store = InMemoryMealStore()
+        let (scan, parent) = makeFlow(store: store)
+        let review = try reviewWithOneFood(scan)
 
-        guard case .mealSaved(let draft) = try #require(parent.events.first) else {
+        await review.saveTapped()
+
+        guard case .mealSaved(let meal) = try #require(parent.events.first) else {
             Issue.record("Expected a mealSaved event")
             return
         }
-        #expect(draft.portions.count == 1)
-        #expect(scan.savedDraft == draft)
+        #expect(meal.portions.count == 1)
+        #expect(scan.savedMeal == meal)
         #expect(scan.router.path == [.saved])
+        let stored = try await store.meals(in: DateInterval(start: .distantPast, end: .distantFuture))
+        #expect(stored == [meal])
     }
 
-    @Test func savingTwiceReportsOnce() throws {
-        let (scan, parent) = makeFlow()
-        scan.send(CaptureEvent.skipPhotoRequested)
-        let review = try #require(scan.reviewViewModel)
-        review.addFoodTapped()
-        review.apply(try #require(review.editor))
+    @Test func savingTwiceStoresOnce() async throws {
+        let store = InMemoryMealStore()
+        let (scan, parent) = makeFlow(store: store)
+        let review = try reviewWithOneFood(scan)
 
-        review.saveTapped()
-        review.saveTapped()
+        await review.saveTapped()
+        await review.saveTapped()
 
         #expect(parent.events.count == 1)
+        #expect(try await store.meals(in: DateInterval(start: .distantPast, end: .distantFuture)).count == 1)
     }
 
-    @Test func doneOnTheConfirmationFinishesTheFlow() throws {
+    @Test func failedSaveStaysOnTheReview() async throws {
+        let (scan, parent) = makeFlow(store: FailingStore())
+        let review = try reviewWithOneFood(scan)
+
+        await review.saveTapped()
+
+        #expect(review.showsSaveError)
+        #expect(review.canSave)
+        #expect(parent.events.isEmpty)
+        #expect(scan.router.path == [.review])
+    }
+
+    @Test func doneOnTheConfirmationFinishesTheFlow() async throws {
         let (scan, parent) = makeFlow()
-        scan.send(CaptureEvent.skipPhotoRequested)
-        let review = try #require(scan.reviewViewModel)
-        review.addFoodTapped()
-        review.apply(try #require(review.editor))
-        review.saveTapped()
+        let review = try reviewWithOneFood(scan)
+        await review.saveTapped()
 
         scan.send(SavedEvent.doneTapped)
 

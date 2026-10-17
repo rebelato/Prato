@@ -817,6 +817,23 @@
         }
       }
     },
+    "review.saveFailed": {
+      "comment": "Saving the meal failed",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't save the meal. Please try again."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível salvar a refeição. Tente de novo."
+          }
+        }
+      }
+    },
     "review.subtitle": {
       "comment": "How to edit the suggested foods",
       "localizations": {
