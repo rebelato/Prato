@@ -1,0 +1,74 @@
+{
+  "sourceLanguage": "pt-BR",
+  "strings": {
+    "mealKind.breakfast": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breakfast"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café da manhã"
+          }
+        }
+      }
+    },
+    "mealKind.dinner": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinner"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jantar"
+          }
+        }
+      }
+    },
+    "mealKind.lunch": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lunch"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Almoço"
+          }
+        }
+      }
+    },
+    "mealKind.snack": {
+      "comment": "Meal type",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snack"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lanche"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

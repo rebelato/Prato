@@ -1,7 +1,6 @@
 import DesignSystem
 import MealKit
 import SwiftUI
-import UIKit
 
 /// Hoje: the entry to a scan and the meals logged today.
 public struct HomeView: View {
@@ -118,7 +117,11 @@ public struct HomeView: View {
             } else {
                 VStack(spacing: 0) {
                     ForEach(viewModel.todayMeals) { meal in
-                        MealRow(meal: meal)
+                        MealRowView(
+                            title: meal.kind.localizedName,
+                            detail: "\(meal.date.formatted(date: .omitted, time: .shortened)) · \(Kcal.format(meal.totals.kcal))",
+                            photo: meal.photo
+                        )
                     }
                 }
             }
@@ -141,56 +144,6 @@ public struct HomeView: View {
             }
         }
         .accessibilityElement(children: .combine)
-    }
-}
-
-/// One saved meal on Hoje: photo, type, time and calories.
-private struct MealRow: View {
-
-    let meal: Meal
-
-    var body: some View {
-        HStack(spacing: 14) {
-            thumbnail
-                .frame(width: 52, height: 52)
-                .clipShape(.rect(cornerRadius: 14))
-                .accessibilityHidden(true)
-
-            VStack(alignment: .leading, spacing: 3) {
-                Text(L10n.mealKind(meal.kind))
-                    .font(PratoFont.bodyEmphasized)
-                    .foregroundStyle(PratoColor.textPrimary)
-                Text(verbatim: "\(meal.date.formatted(date: .omitted, time: .shortened)) · \(Kcal.format(meal.totals.kcal))")
-                    .font(PratoFont.caption.monospacedDigit())
-                    .foregroundStyle(PratoColor.textSecondary)
-            }
-
-            Spacer(minLength: 0)
-        }
-        .padding(.vertical, 10)
-        .accessibilityElement(children: .combine)
-    }
-
-    @ViewBuilder
-    private var thumbnail: some View {
-        if let photo = meal.photo, let image = UIImage(data: photo) {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFill()
-        } else {
-            PratoColor.softSurface
-                .overlay {
-                    Image(systemName: "fork.knife")
-                        .foregroundStyle(PratoColor.accent)
-                }
-        }
-    }
-}
-
-/// Calories for the user's locale ("1.194 kcal" in pt-BR, "1,194 kcal" in en).
-private enum Kcal {
-    static func format(_ kcal: Int) -> String {
-        "\(kcal.formatted(.number)) kcal"
     }
 }
 

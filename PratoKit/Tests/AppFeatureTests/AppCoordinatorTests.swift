@@ -1,5 +1,6 @@
 import Coordinator
 import Foundation
+import HistoryFeature
 import HomeFeature
 import MealKit
 import ScanFeature
@@ -107,6 +108,27 @@ struct AppCoordinatorTests {
         #expect(coordinator.activeScan == nil)
         #expect(coordinator.childCoordinators.isEmpty)
         #expect(coordinator.selectedTab == .today)
+    }
+
+    @Test func historyScanButtonOpensCameraScan() throws {
+        let coordinator = makeCoordinator()
+        coordinator.select(.history)
+
+        coordinator.historyViewModel.scanTapped()
+
+        #expect(try #require(coordinator.activeScan).source == .camera)
+        #expect(coordinator.selectedTab == .history)
+    }
+
+    @Test func historyReadsTheSameStore() async throws {
+        let store = InMemoryMealStore()
+        let coordinator = makeCoordinator(store: store)
+        let rice = try #require(FoodCatalog.development.foods.first)
+        let meal = try await store.save(MealDraft(kind: .lunch, portions: [FoodPortion(food: rice, grams: 100)], photo: nil, date: .now))
+
+        await coordinator.historyViewModel.load()
+
+        #expect(coordinator.historyViewModel.weekMeals == [meal])
     }
 
     @Test func unrelatedEventsAreNotHandled() {

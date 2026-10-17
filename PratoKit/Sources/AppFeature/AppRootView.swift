@@ -1,5 +1,6 @@
 import Coordinator
 import DesignSystem
+import HistoryFeature
 import HomeFeature
 import ScanFeature
 import SwiftUI
@@ -24,7 +25,7 @@ public struct AppRootView: View {
                 .tabItem { Label(L10n.Tab.scan, systemImage: "viewfinder") }
                 .tag(AppTab.scan)
 
-            HistoryPlaceholderView()
+            HistoryView(viewModel: coordinator.historyViewModel)
                 .tabItem { Label(L10n.Tab.history, systemImage: "clock") }
                 .tag(AppTab.history)
         }
