@@ -16,10 +16,13 @@ public struct CaptureView: View {
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Button(L10n.Common.close) { viewModel.closeTapped() }
-                    .font(PratoFont.bodyEmphasized)
-                    .foregroundStyle(PratoColor.accent)
-                    .frame(minHeight: 44)
+                Button {
+                    viewModel.closeTapped()
+                } label: {
+                    CloseIcon()
+                }
+                .padding(.leading, -12)
+                .accessibilityLabel(L10n.Common.close)
 
                 ScreenHeader(title: L10n.Capture.title, subtitle: L10n.Capture.subtitle)
                     .padding(.top, 12)

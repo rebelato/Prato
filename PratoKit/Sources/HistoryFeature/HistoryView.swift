@@ -5,7 +5,7 @@ import SwiftUI
 /// Histórico: one week of meals, with totals and the meals of the selected day.
 public struct HistoryView: View {
 
-    private let viewModel: HistoryViewModel
+    @Bindable private var viewModel: HistoryViewModel
 
     public init(viewModel: HistoryViewModel) {
         self.viewModel = viewModel
@@ -19,9 +19,6 @@ public struct HistoryView: View {
                         .font(PratoFont.screenTitle)
                         .foregroundStyle(PratoColor.textPrimary)
                         .accessibilityAddTraits(.isHeader)
-                    Text(L10n.subtitle)
-                        .font(PratoFont.body)
-                        .foregroundStyle(PratoColor.textSecondary)
                 }
 
                 weekNavigator
@@ -46,6 +43,14 @@ public struct HistoryView: View {
         }
         .background(PratoColor.background)
         .task { await viewModel.load() }
+        .sheet(isPresented: $viewModel.isDayPickerPresented) {
+            DayPickerSheet(
+                selectedDay: viewModel.selectedDay,
+                lastDay: viewModel.lastSelectableDay,
+                onPick: { day in Task { await viewModel.dayPicked(day) } },
+                onCancel: { viewModel.isDayPickerPresented = false }
+            )
+        }
     }
 
     // MARK: Week
@@ -62,9 +67,19 @@ public struct HistoryView: View {
 
             Spacer()
 
-            Text((viewModel.week.start..<viewModel.weekLastDay).formatted(.interval.day().month(.wide)))
-                .font(PratoFont.bodyEmphasized)
-                .foregroundStyle(PratoColor.textPrimary)
+            Button {
+                viewModel.weekTitleTapped()
+            } label: {
+                HStack(spacing: 6) {
+                    Text((viewModel.week.start..<viewModel.weekLastDay).formatted(.interval.day().month(.wide)))
+                        .font(PratoFont.bodyEmphasized)
+                        .foregroundStyle(PratoColor.textPrimary)
+                }
+                .frame(minHeight: 44)
+                .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint(L10n.pickDayHint)
 
             Spacer()
 
@@ -118,6 +133,13 @@ public struct HistoryView: View {
 
     private var emptyWeek: some View {
         VStack(alignment: .leading, spacing: 10) {
+            PratoImage.emptyWeek
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 240)
+                .frame(maxWidth: .infinity)
+                .padding(.bottom, 6)
+                .accessibilityHidden(true)
             Text(L10n.emptyTitle)
                 .font(PratoFont.sectionTitle)
                 .foregroundStyle(PratoColor.textPrimary)
@@ -217,6 +239,56 @@ private struct DayCell: View {
     private var accessibilityLabel: String {
         let date = day.date.formatted(.dateTime.weekday(.wide).day().month(.wide))
         return day.mealCount > 0 ? "\(date), \(L10n.mealCount(day.mealCount))" : date
+    }
+}
+
+/// "Escolher dia": a calendar up to today. Tapping a day picks it right away.
+private struct DayPickerSheet: View {
+
+    @State private var day: Date
+
+    private let lastDay: Date
+    private let onPick: @MainActor (Date) -> Void
+    private let onCancel: @MainActor () -> Void
+
+    init(
+        selectedDay: Date,
+        lastDay: Date,
+        onPick: @escaping @MainActor (Date) -> Void,
+        onCancel: @escaping @MainActor () -> Void
+    ) {
+        self._day = State(initialValue: selectedDay)
+        self.lastDay = lastDay
+        self.onPick = onPick
+        self.onCancel = onCancel
+    }
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                DatePicker(L10n.pickDay, selection: $day, in: ...lastDay, displayedComponents: .date)
+                    .datePickerStyle(.graphical)
+                    .labelsHidden()
+                    .padding(.horizontal, 16)
+            }
+            .background(PratoColor.background)
+            .navigationTitle(L10n.pickDay)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(PratoColor.background, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(L10n.pickDayCancel) { onCancel() }
+                }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(L10n.pickDayToday) { onPick(lastDay) }
+                }
+            }
+        }
+        .tint(PratoColor.accent)
+        .onChange(of: day) { _, newDay in onPick(newDay) }
+        .presentationDetents([.fraction(0.65), .large])
+        .presentationDragIndicator(.visible)
+        .presentationBackground(PratoColor.background)
     }
 }
 
