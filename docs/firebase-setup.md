@@ -54,6 +54,7 @@ Builds de Release usam o **App Attest** (`AppAttestProvider`).
 
 1. **Security › App Check › APIs**, linha **Firebase AI Logic**, *Set up* → **Enforced**.
 2. Antes de ativar, acompanhe as métricas por alguns dias para ver se as requisições chegam verificadas.
+   - O enforcement vale para o Firebase AI Logic **no projeto inteiro**. Se o projeto tiver outros apps que usam o AI Logic, registre todos no App Check antes, ou eles passam a ser bloqueados.
 3. **Proteção contra replay** (opcional): exige um token novo por requisição, com alguma latência extra. Para usar, ative no console e passe `useLimitedUseAppCheckTokens: true` em `GeminiMealAnalyzer.Configuration`.
 
 ## 3. Modelo
@@ -103,4 +104,4 @@ Pontos para a política de privacidade e para a seção de privacidade da App St
 
 - O catálogo tem 12 alimentos com **valores de demonstração**, marcados como tal no app e gravados com essa origem em cada item. Antes de publicar, troque por uma base com fonte identificada (por exemplo, a TACO, depois de conferir as condições de uso).
 - Com um catálogo pequeno, muitos alimentos vão cair em **Confirme estes alimentos**. Isso é intencional: o app pergunta em vez de associar a um alimento diferente.
-- A integração real não foi executada: o código foi escrito sem acesso a um projeto Firebase nem a um Mac.
+- A integração foi testada em 17/10/2026 com um projeto Firebase real (provedor Gemini Developer API, token de debug do App Check), num build de Debug. O caminho de Release com App Attest e o enforcement ligado ainda não foram exercitados.
