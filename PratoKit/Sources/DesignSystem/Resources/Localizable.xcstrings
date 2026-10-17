@@ -1,0 +1,41 @@
+{
+  "sourceLanguage" : "pt-BR",
+  "strings" : {
+    "macros.carbs" : {
+      "comment" : "Carbohydrate macro label",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Carbs" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Carboidratos" } }
+      }
+    },
+    "macros.fat" : {
+      "comment" : "Fat macro label",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fat" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Gorduras" } }
+      }
+    },
+    "macros.kcal" : {
+      "comment" : "Unit after the calorie number",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "kcal" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "kcal" } }
+      }
+    },
+    "macros.mealEstimate" : {
+      "comment" : "Label at the top of a meal's calorie card",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Meal estimate" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Estimativa da refeição" } }
+      }
+    },
+    "macros.protein" : {
+      "comment" : "Protein macro label",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Protein" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Proteínas" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

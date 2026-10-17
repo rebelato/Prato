@@ -1,6 +1,8 @@
 import Coordinator
 import HomeFeature
+import MealKit
 import Observation
+import ScanFeature
 
 /// Root of the coordinator tree: owns the tab bar and what is presented over it.
 @MainActor
@@ -16,11 +18,29 @@ public final class AppCoordinator: Coordinator {
     /// Presentations over the tab bar.
     public let router = Router<AppRoute>()
 
+    /// The meal saved by the last scan. Temporary: replaced by persistence in a later PR.
+    public private(set) var lastSavedMeal: MealDraft?
+
     @ObservationIgnored public private(set) lazy var homeViewModel = HomeViewModel { [weak self] event in
         self?.send(event)
     }
 
-    public init() {}
+    private let analyzer: any MealAnalyzing
+    private let catalog: FoodCatalog
+
+    public init(
+        analyzer: any MealAnalyzing = MockMealAnalyzer(),
+        catalog: FoodCatalog = .development
+    ) {
+        self.analyzer = analyzer
+        self.catalog = catalog
+    }
+
+    /// The scan flow on screen, if any.
+    public var activeScan: ScanCoordinator? {
+        guard case .scan(let scan) = router.fullScreenCover else { return nil }
+        return scan
+    }
 
     /// Called by the tab bar. The scan tab starts a scan and keeps the current tab selected.
     public func select(_ tab: AppTab) {
@@ -41,10 +61,13 @@ public final class AppCoordinator: Coordinator {
             }
             return true
 
-        case let event as ScanPlaceholderEvent:
+        case let event as ScanEvent:
             switch event {
-            case .closeRequested:
-                router.dismiss()
+            case .finished(let draft):
+                lastSavedMeal = draft
+                closeScan()
+            case .cancelled:
+                closeScan()
             }
             return true
 
@@ -54,6 +77,16 @@ public final class AppCoordinator: Coordinator {
     }
 
     private func startScan(from source: ScanSource) {
-        router.present(.scan(source), style: .fullScreenCover)
+        guard activeScan == nil else { return }
+        let scan = ScanCoordinator(source: source, analyzer: analyzer, catalog: catalog)
+        addChild(scan)
+        router.present(.scan(scan), style: .fullScreenCover)
+    }
+
+    private func closeScan() {
+        if let scan = activeScan {
+            childDidFinish(scan)
+        }
+        router.dismiss()
     }
 }

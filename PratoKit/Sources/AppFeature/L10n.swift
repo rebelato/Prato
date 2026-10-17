@@ -14,17 +14,6 @@ enum L10n {
         }
     }
 
-    enum ScanPlaceholder {
-        static var title: String {
-            String(localized: "scan.placeholder.title", defaultValue: "Escanear refeição", bundle: .module, comment: "Title of the temporary scan screen")
-        }
-        static var subtitle: String {
-            String(localized: "scan.placeholder.subtitle", defaultValue: "A câmera chega em breve.", bundle: .module, comment: "The scan flow is not built yet")
-        }
-        static var close: String {
-            String(localized: "scan.placeholder.close", defaultValue: "Fechar", bundle: .module, comment: "Closes the temporary scan screen")
-        }
-    }
 
     enum HistoryPlaceholder {
         static var title: String {

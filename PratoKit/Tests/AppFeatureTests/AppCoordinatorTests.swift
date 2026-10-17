@@ -1,5 +1,8 @@
 import Coordinator
+import Foundation
 import HomeFeature
+import MealKit
+import ScanFeature
 import Testing
 @testable import AppFeature
 
@@ -8,54 +11,84 @@ private struct UnrelatedEvent: Event {}
 @MainActor
 struct AppCoordinatorTests {
 
+    private func makeCoordinator() -> AppCoordinator {
+        AppCoordinator(analyzer: MockMealAnalyzer(delay: .zero), catalog: .development)
+    }
+
     @Test func startsOnTodayWithNothingPresented() {
-        let coordinator = AppCoordinator()
+        let coordinator = makeCoordinator()
 
         #expect(coordinator.selectedTab == .today)
-        #expect(coordinator.router.fullScreenCover == nil)
+        #expect(coordinator.activeScan == nil)
         #expect(coordinator.router.sheet == nil)
     }
 
     @Test func historyTabIsSelected() {
-        let coordinator = AppCoordinator()
+        let coordinator = makeCoordinator()
 
         coordinator.select(.history)
 
         #expect(coordinator.selectedTab == .history)
     }
 
-    @Test func scanTabOpensCameraScanAndKeepsCurrentTab() {
-        let coordinator = AppCoordinator()
+    @Test func scanTabOpensCameraScanAndKeepsCurrentTab() throws {
+        let coordinator = makeCoordinator()
         coordinator.select(.history)
 
         coordinator.select(.scan)
 
+        let scan = try #require(coordinator.activeScan)
+        #expect(scan.source == .camera)
         #expect(coordinator.selectedTab == .history)
-        #expect(coordinator.router.fullScreenCover == .scan(.camera))
+        #expect(coordinator.childCoordinators.count == 1)
+        #expect(scan.parentCoordinator === coordinator)
     }
 
-    @Test func homeButtonsOpenScanFromTheirSource() {
-        let coordinator = AppCoordinator()
+    @Test func homeGalleryButtonOpensGalleryScan() throws {
+        let coordinator = makeCoordinator()
 
         coordinator.homeViewModel.galleryTapped()
-        #expect(coordinator.router.fullScreenCover == .scan(.gallery))
 
-        coordinator.router.dismiss()
-        coordinator.homeViewModel.scanTapped()
-        #expect(coordinator.router.fullScreenCover == .scan(.camera))
+        #expect(try #require(coordinator.activeScan).source == .gallery)
     }
 
-    @Test func closingScanDismissesTheCover() {
-        let coordinator = AppCoordinator()
+    @Test func secondScanRequestKeepsTheOpenFlow() throws {
+        let coordinator = makeCoordinator()
         coordinator.select(.scan)
+        let first = try #require(coordinator.activeScan)
 
-        coordinator.send(ScanPlaceholderEvent.closeRequested)
+        coordinator.homeViewModel.scanTapped()
 
-        #expect(coordinator.router.fullScreenCover == nil)
+        #expect(coordinator.activeScan === first)
+        #expect(coordinator.childCoordinators.count == 1)
+    }
+
+    @Test func cancellingScanClosesTheFlow() throws {
+        let coordinator = makeCoordinator()
+        coordinator.select(.scan)
+        let scan = try #require(coordinator.activeScan)
+
+        scan.send(ScanEvent.cancelled)
+
+        #expect(coordinator.activeScan == nil)
+        #expect(coordinator.childCoordinators.isEmpty)
+        #expect(coordinator.lastSavedMeal == nil)
+    }
+
+    @Test func finishingScanKeepsTheMealAndClosesTheFlow() throws {
+        let coordinator = makeCoordinator()
+        coordinator.select(.scan)
+        let scan = try #require(coordinator.activeScan)
+        let draft = MealDraft(kind: .lunch, portions: [], photo: nil, date: .now)
+
+        scan.send(ScanEvent.finished(draft))
+
+        #expect(coordinator.lastSavedMeal == draft)
+        #expect(coordinator.activeScan == nil)
     }
 
     @Test func unrelatedEventsAreNotHandled() {
-        let coordinator = AppCoordinator()
+        let coordinator = makeCoordinator()
 
         #expect(coordinator.handle(UnrelatedEvent()) == false)
     }
