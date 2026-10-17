@@ -21,8 +21,10 @@ O app é fino: só `PratoApp.swift`, assets e o `InfoPlist.xcstrings`. Todo o re
 Prato/                    target do app
 PratoKit/
   Sources/
-    DesignSystem/         cores (claro e escuro), tipografia, botões, ilustração do prato
+    DesignSystem/         cores (claro e escuro), tipografia, botões, ilustração do prato, card de macros
+    MealKit/              domínio: alimentos, porções, regra de arredondamento, MealAnalyzing + mock
     HomeFeature/          tela Hoje: HomeView, HomeViewModel, HomeEvent
+    ScanFeature/          fluxo de registro: câmera, conferir foto, análise, revisão e ajuste de porção
     AppFeature/           AppCoordinator, tab bar e telas provisórias
   Tests/                  Swift Testing, um alvo por módulo
 ```

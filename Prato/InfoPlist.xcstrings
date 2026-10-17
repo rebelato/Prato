@@ -1,24 +1,42 @@
 {
-  "sourceLanguage" : "pt-BR",
-  "strings" : {
-    "CFBundleDisplayName" : {
-      "comment" : "App name under the icon",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prato"
+  "sourceLanguage": "pt-BR",
+  "strings": {
+    "CFBundleDisplayName": {
+      "comment": "App name under the icon",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prato"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prato"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prato"
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription": {
+      "comment": "Why the app asks for the camera",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prato uses the camera to photograph your meals."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Prato usa a câmera para fotografar suas refeições."
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

@@ -1,4 +1,5 @@
 import Testing
+import MealKit
 @testable import HomeFeature
 
 @MainActor
