@@ -15,7 +15,7 @@ public struct CaptureView: View {
 
     public var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .trailing, spacing: 0) {
                 Button {
                     viewModel.closeTapped()
                 } label: {
