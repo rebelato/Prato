@@ -125,7 +125,7 @@ struct ReviewView: View {
                     Button {
                         viewModel.portionTapped(portion)
                     } label: {
-                        PortionRow(portion: portion)
+                        PortionRow(portion: portion, isTappable: true)
                     }
                     .buttonStyle(.plain)
                     Divider()
@@ -133,46 +133,6 @@ struct ReviewView: View {
                 }
             }
         }
-    }
-}
-
-private struct PortionRow: View {
-
-    let portion: FoodPortion
-
-    var body: some View {
-        HStack(spacing: 14) {
-            Text(String(portion.food.name().prefix(1)))
-                .font(.title3.weight(.bold))
-                .foregroundStyle(PratoColor.accent)
-                .frame(width: 48, height: 48)
-                .background(PratoColor.surface, in: .rect(cornerRadius: 14))
-                .accessibilityHidden(true)
-
-            VStack(alignment: .leading, spacing: 3) {
-                Text(portion.food.name())
-                    .font(PratoFont.bodyEmphasized)
-                    .foregroundStyle(PratoColor.textPrimary)
-                Text(L10n.Review.itemKcal(portion.totals.kcal))
-                    .font(PratoFont.caption)
-                    .foregroundStyle(PratoColor.textSecondary)
-            }
-
-            Spacer(minLength: 8)
-
-            Text(Grams.format(portion.grams))
-                .font(PratoFont.body.monospacedDigit())
-                .foregroundStyle(PratoColor.textPrimary)
-
-            Image(systemName: "chevron.right")
-                .font(.footnote.weight(.semibold))
-                .foregroundStyle(PratoColor.textSecondary)
-                .accessibilityHidden(true)
-        }
-        .padding(.vertical, 14)
-        .contentShape(.rect)
-        .accessibilityElement(children: .combine)
-        .accessibilityHint(L10n.Review.itemHint)
     }
 }
 

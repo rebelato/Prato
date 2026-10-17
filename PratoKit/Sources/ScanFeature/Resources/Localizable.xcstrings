@@ -850,6 +850,125 @@
           }
         }
       }
+    },
+    "saved.done": {
+      "comment": "Closes the flow and shows today's diary",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to Today"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltar para hoje"
+          }
+        }
+      }
+    },
+    "saved.eyebrow": {
+      "comment": "Small label above the confirmation title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal logged"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeição registrada"
+          }
+        }
+      }
+    },
+    "saved.loggedAt": {
+      "comment": "When the meal was logged; the argument is a time such as 12:30",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logged at %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registrado às %@."
+          }
+        }
+      }
+    },
+    "saved.title.breakfast": {
+      "comment": "Confirmation title after saving a breakfast",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breakfast saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café da manhã salvo."
+          }
+        }
+      }
+    },
+    "saved.title.dinner": {
+      "comment": "Confirmation title after saving a dinner",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinner saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jantar salvo."
+          }
+        }
+      }
+    },
+    "saved.title.lunch": {
+      "comment": "Confirmation title after saving a lunch",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lunch saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Almoço salvo."
+          }
+        }
+      }
+    },
+    "saved.title.snack": {
+      "comment": "Confirmation title after saving a snack",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snack saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lanche salvo."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

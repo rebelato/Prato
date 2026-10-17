@@ -2,10 +2,13 @@ import Coordinator
 import Foundation
 import MealKit
 
-/// How the scan flow ended. Handled by whoever presented the flow.
+/// What the scan flow reports to whoever presented it.
 public enum ScanEvent: Event {
-    /// The user reviewed the meal and tapped "Salvar refeição".
-    case finished(MealDraft)
+    /// The user reviewed the meal and tapped "Salvar refeição". The flow stays open on
+    /// the confirmation screen; the parent should store the meal now.
+    case mealSaved(MealDraft)
+    /// The user tapped "Voltar para hoje" after saving. The parent closes the flow.
+    case finished
     /// The user closed the flow without saving.
     case cancelled
 }
@@ -18,6 +21,8 @@ public enum ScanRoute: Hashable, Sendable {
     case analyzing
     /// "Vamos conferir?"
     case review
+    /// "Almoço salvo."
+    case saved
 }
 
 enum CaptureEvent: Event {
@@ -41,4 +46,8 @@ enum AnalyzingEvent: Event {
 
 enum ReviewEvent: Event {
     case saveRequested(MealDraft)
+}
+
+enum SavedEvent: Event {
+    case doneTapped
 }

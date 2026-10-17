@@ -3,7 +3,7 @@ import Foundation
 import MealKit
 import Observation
 
-/// Owns the scan flow: camera → photo check → analysis → review.
+/// Owns the scan flow: camera → photo check → analysis → review → saved.
 ///
 /// It reports how the flow ended with a ``ScanEvent`` sent to its parent, which closes it.
 @MainActor
@@ -20,6 +20,8 @@ public final class ScanCoordinator: Coordinator {
     public private(set) var photo: Data?
     public private(set) var analyzingViewModel: AnalyzingViewModel?
     public private(set) var reviewViewModel: ReviewViewModel?
+    /// The meal shown on the confirmation screen, once saved.
+    public private(set) var savedDraft: MealDraft?
 
     @ObservationIgnored public private(set) lazy var captureViewModel = CaptureViewModel(source: source) { [weak self] event in
         self?.send(event)
@@ -50,6 +52,8 @@ public final class ScanCoordinator: Coordinator {
         case let event as AnalyzingEvent:
             handle(event)
         case let event as ReviewEvent:
+            handle(event)
+        case let event as SavedEvent:
             handle(event)
         default:
             return false
@@ -97,7 +101,18 @@ public final class ScanCoordinator: Coordinator {
     private func handle(_ event: ReviewEvent) {
         switch event {
         case .saveRequested(let draft):
-            parentCoordinator?.send(ScanEvent.finished(draft))
+            guard savedDraft == nil else { return }
+            savedDraft = draft
+            parentCoordinator?.send(ScanEvent.mealSaved(draft))
+            // Replacing the whole stack leaves nothing to go back to: the meal can't be saved twice.
+            router.path = [.saved]
+        }
+    }
+
+    private func handle(_ event: SavedEvent) {
+        switch event {
+        case .doneTapped:
+            parentCoordinator?.send(ScanEvent.finished)
         }
     }
 

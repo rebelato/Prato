@@ -108,7 +108,7 @@ struct ScanCoordinatorTests {
         #expect(review.photo == nil)
     }
 
-    @Test func savingReportsTheDraftToTheParent() throws {
+    @Test func savingReportsTheMealAndShowsTheConfirmation() throws {
         let (scan, parent) = makeFlow()
         scan.send(CaptureEvent.skipPhotoRequested)
         let review = try #require(scan.reviewViewModel)
@@ -117,11 +117,43 @@ struct ScanCoordinatorTests {
 
         review.saveTapped()
 
-        guard case .finished(let draft) = try #require(parent.events.first) else {
-            Issue.record("Expected a finished event")
+        guard case .mealSaved(let draft) = try #require(parent.events.first) else {
+            Issue.record("Expected a mealSaved event")
             return
         }
         #expect(draft.portions.count == 1)
+        #expect(scan.savedDraft == draft)
+        #expect(scan.router.path == [.saved])
+    }
+
+    @Test func savingTwiceReportsOnce() throws {
+        let (scan, parent) = makeFlow()
+        scan.send(CaptureEvent.skipPhotoRequested)
+        let review = try #require(scan.reviewViewModel)
+        review.addFoodTapped()
+        review.apply(try #require(review.editor))
+
+        review.saveTapped()
+        review.saveTapped()
+
+        #expect(parent.events.count == 1)
+    }
+
+    @Test func doneOnTheConfirmationFinishesTheFlow() throws {
+        let (scan, parent) = makeFlow()
+        scan.send(CaptureEvent.skipPhotoRequested)
+        let review = try #require(scan.reviewViewModel)
+        review.addFoodTapped()
+        review.apply(try #require(review.editor))
+        review.saveTapped()
+
+        scan.send(SavedEvent.doneTapped)
+
+        guard case .finished? = parent.events.last else {
+            Issue.record("Expected a finished event")
+            return
+        }
+        #expect(parent.events.count == 2)
     }
 
     @Test func closeReportsCancelToTheParent() {
@@ -129,7 +161,7 @@ struct ScanCoordinatorTests {
 
         scan.captureViewModel.closeTapped()
 
-        guard case .cancelled = parent.events.first else {
+        guard case .cancelled? = parent.events.first else {
             Issue.record("Expected a cancelled event")
             return
         }
