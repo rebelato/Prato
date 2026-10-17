@@ -19,6 +19,9 @@ struct AnalyzingView: View {
                 case .analyzing:
                     analyzing
                         .padding(.top, 40)
+                case .noFood:
+                    noFood
+                        .padding(.top, 32)
                 case .failed:
                     failed
                         .padding(.top, 32)
@@ -49,6 +52,26 @@ struct AnalyzingView: View {
         }
         .frame(maxWidth: .infinity)
         .accessibilityElement(children: .combine)
+    }
+
+    private var noFood: some View {
+        VStack(spacing: 8) {
+            Text(L10n.Analyzing.noFoodTitle)
+                .font(PratoFont.bodyEmphasized)
+                .foregroundStyle(PratoColor.textPrimary)
+            Text(L10n.Analyzing.noFoodMessage)
+                .font(PratoFont.secondary)
+                .foregroundStyle(PratoColor.textSecondary)
+                .multilineTextAlignment(.center)
+
+            Button(L10n.Confirm.retake) { viewModel.retakeTapped() }
+                .buttonStyle(.pratoPrimary)
+                .padding(.top, 16)
+
+            Button(L10n.Analyzing.manual) { viewModel.continueWithoutAnalysisTapped() }
+                .buttonStyle(.pratoText)
+        }
+        .frame(maxWidth: .infinity)
     }
 
     private var failed: some View {

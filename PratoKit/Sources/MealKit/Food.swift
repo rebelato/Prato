@@ -24,12 +24,15 @@ public struct Food: Identifiable, Hashable, Sendable {
     public let namePT: String
     public let nameEN: String
     public let per100g: Macros
+    /// Where the values come from. Kept with saved items, so the history shows its origin.
+    public let source: String?
 
-    public init(id: String, namePT: String, nameEN: String, per100g: Macros) {
+    public init(id: String, namePT: String, nameEN: String, per100g: Macros, source: String? = nil) {
         self.id = id
         self.namePT = namePT
         self.nameEN = nameEN
         self.per100g = per100g
+        self.source = source
     }
 
     /// The food's name in the user's language: Portuguese for `pt`, English otherwise.

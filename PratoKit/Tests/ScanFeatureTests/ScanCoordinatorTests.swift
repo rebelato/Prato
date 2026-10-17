@@ -20,7 +20,20 @@ private final class ParentSpy: Coordinator {
 
 private struct FailingAnalyzer: MealAnalyzing {
     struct Failure: Error {}
-    func analyze(photo: Data) async throws -> [FoodSuggestion] { throw Failure() }
+    var error: any Error = Failure()
+    var sendsPhotoToCloud: Bool { true }
+    func analyze(photo: Data) async throws -> MealAnalysis { throw error }
+}
+
+/// Counts calls, to prove the photo is sent once.
+private actor CountingAnalyzer: MealAnalyzing {
+    private(set) var calls = 0
+    nonisolated var sendsPhotoToCloud: Bool { true }
+    func analyze(photo: Data) async throws -> MealAnalysis {
+        calls += 1
+        try await Task.sleep(for: .milliseconds(50))
+        return MealAnalysis(suggestions: [FoodSuggestion(foodID: "rice-white-cooked", grams: 100)])
+    }
 }
 
 struct FailingStore: MealStoring {
@@ -91,6 +104,50 @@ struct ScanCoordinatorTests {
         analyzing.continueWithoutAnalysisTapped()
         #expect(scan.router.path == [.confirm, .review])
         #expect(try #require(scan.reviewViewModel).portions.isEmpty)
+    }
+
+    @Test func noFoodOffersRetakeThatReturnsToTheCamera() async throws {
+        let (scan, _) = makeFlow(analyzer: FailingAnalyzer(error: MealAnalysisError.noFoodFound))
+        scan.send(CaptureEvent.photoTaken(photo))
+        scan.send(PhotoConfirmEvent.analyzeRequested)
+        let analyzing = try #require(scan.analyzingViewModel)
+
+        await analyzing.analyze()
+        #expect(analyzing.state == .noFood)
+
+        analyzing.retakeTapped()
+        #expect(scan.router.path.isEmpty)
+        #expect(scan.analyzingViewModel == nil)
+    }
+
+    @Test func unmatchedFoodsReachTheReview() async throws {
+        let unmatched = UnmatchedFood(name: "Farofa", preparation: nil, estimatedGrams: 40, alternatives: [])
+        let (scan, _) = makeFlow(analyzer: MockMealAnalyzer(delay: .zero, unmatched: [unmatched]))
+        scan.send(CaptureEvent.photoTaken(photo))
+        scan.send(PhotoConfirmEvent.analyzeRequested)
+
+        await scan.analyzingViewModel?.analyze()
+
+        #expect(try #require(scan.reviewViewModel).unmatched == [unmatched])
+    }
+
+    @Test func overlappingAnalyzeCallsSendThePhotoOnce() async throws {
+        let analyzer = CountingAnalyzer()
+        let (scan, _) = makeFlow(analyzer: analyzer)
+        scan.send(CaptureEvent.photoTaken(photo))
+        scan.send(PhotoConfirmEvent.analyzeRequested)
+        let analyzing = try #require(scan.analyzingViewModel)
+
+        async let first: Void = analyzing.analyze()
+        async let second: Void = analyzing.analyze()
+        _ = await (first, second)
+
+        #expect(await analyzer.calls == 1)
+    }
+
+    @Test func cloudNoticeFollowsTheAnalyzer() {
+        #expect(makeFlow(analyzer: FailingAnalyzer()).0.sendsPhotoToCloud)
+        #expect(!makeFlow(analyzer: MockMealAnalyzer()).0.sendsPhotoToCloud)
     }
 
     @Test func lateAnalysisResultIsIgnoredAfterLeaving() async throws {

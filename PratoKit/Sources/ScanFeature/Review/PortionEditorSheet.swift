@@ -54,6 +54,12 @@ struct PortionEditorSheet: View {
     private var content: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                if let recognizedName = editor.recognizedName {
+                    Text(L10n.Editor.recognizedAs(recognizedName))
+                        .font(PratoFont.secondary)
+                        .foregroundStyle(PratoColor.textSecondary)
+                        .padding(.bottom, 16)
+                }
                 fieldLabel(L10n.Editor.food)
                 foodPicker
                     .padding(.top, 8)

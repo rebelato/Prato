@@ -9,6 +9,8 @@ public final class ReviewViewModel {
 
     public var mealKind: MealKind
     public private(set) var portions: [FoodPortion]
+    /// Foods the analysis saw but couldn't match; each needs the user to pick a catalog food.
+    public private(set) var unmatched: [UnmatchedFood]
     /// The item open in the edit sheet, if any.
     public var editor: PortionEditor?
     public private(set) var isSaving = false
@@ -27,6 +29,7 @@ public final class ReviewViewModel {
     ///   - date: When the meal is being logged; picks the default meal type.
     init(
         suggestions: [FoodSuggestion],
+        unmatched: [UnmatchedFood] = [],
         photo: Data?,
         catalog: FoodCatalog,
         store: any MealStoring,
@@ -37,6 +40,7 @@ public final class ReviewViewModel {
         self.portions = suggestions.compactMap { suggestion in
             catalog.food(id: suggestion.foodID).map { FoodPortion(food: $0, grams: suggestion.grams) }
         }
+        self.unmatched = unmatched
         self.mealKind = .suggested(for: date, calendar: calendar)
         self.catalog = catalog
         self.photo = photo
@@ -49,6 +53,11 @@ public final class ReviewViewModel {
     public var totalGrams: Int { portions.totalGrams }
     public var canSave: Bool { !portions.isEmpty && !isSaving && savedMeal == nil }
 
+    /// Whether any item uses demonstration values, so the review can say so.
+    public var usesDemonstrationValues: Bool {
+        portions.contains { $0.food.source == FoodCatalog.demonstrationSource }
+    }
+
     public func portionTapped(_ portion: FoodPortion) {
         editor = PortionEditor(mode: .edit(portion.id), food: portion.food, grams: portion.grams)
     }
@@ -58,11 +67,31 @@ public final class ReviewViewModel {
         editor = PortionEditor(mode: .add, food: first, grams: 100)
     }
 
+    /// Opens the add sheet for a food the analysis couldn't match, starting from its suggestion.
+    public func unmatchedTapped(_ item: UnmatchedFood) {
+        guard let food = item.suggestedFoodID.flatMap(catalog.food(id:)) ?? catalog.foods.first else { return }
+        editor = PortionEditor(
+            mode: .add,
+            food: food,
+            grams: item.estimatedGrams ?? 100,
+            resolves: item.id,
+            recognizedName: item.name
+        )
+    }
+
+    /// "Not on my plate": drops a food the analysis couldn't match.
+    public func dismissUnmatched(_ id: UnmatchedFood.ID) {
+        unmatched.removeAll { $0.id == id }
+    }
+
     public func apply(_ editor: PortionEditor) {
         guard editor.canApply else { return }
         switch editor.mode {
         case .add:
             portions.append(FoodPortion(food: editor.food, grams: editor.grams))
+            if let resolved = editor.resolves {
+                unmatched.removeAll { $0.id == resolved }
+            }
         case .edit(let id):
             if let index = portions.firstIndex(where: { $0.id == id }) {
                 portions[index].food = editor.food

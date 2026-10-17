@@ -35,6 +35,8 @@ final class FoodItemRecord {
     var proteinPer100g: Double
     var carbsPer100g: Double
     var fatPer100g: Double
+    /// Origin of the values. Optional so databases saved before this field still open.
+    var source: String?
     var meal: MealRecord?
 
     init(position: Int, portion: FoodPortion) {
@@ -48,6 +50,7 @@ final class FoodItemRecord {
         self.proteinPer100g = portion.food.per100g.protein
         self.carbsPer100g = portion.food.per100g.carbs
         self.fatPer100g = portion.food.per100g.fat
+        self.source = portion.food.source
     }
 }
 
@@ -71,7 +74,8 @@ extension FoodItemRecord {
                 id: foodID,
                 namePT: namePT,
                 nameEN: nameEN,
-                per100g: Macros(kcal: kcalPer100g, protein: proteinPer100g, carbs: carbsPer100g, fat: fatPer100g)
+                per100g: Macros(kcal: kcalPer100g, protein: proteinPer100g, carbs: carbsPer100g, fat: fatPer100g),
+                source: source
             ),
             grams: grams
         )

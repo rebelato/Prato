@@ -65,6 +65,9 @@ enum L10n {
         static var retake: String {
             String(localized: "confirm.retake", defaultValue: "Tirar outra foto", bundle: .module, comment: "Goes back to the camera")
         }
+        static var cloudNotice: String {
+            String(localized: "confirm.cloudNotice", defaultValue: "Ao analisar, a foto é enviada ao Gemini, do Google, só para identificar os alimentos. O Prato não guarda a foto na nuvem.", bundle: .module, comment: "Tells the user the photo leaves the device when analyzed")
+        }
     }
 
     enum Analyzing {
@@ -89,6 +92,12 @@ enum L10n {
         static var manual: String {
             String(localized: "analyzing.manual", defaultValue: "Registrar sem análise", bundle: .module, comment: "Goes to the review with no suggested foods")
         }
+        static var noFoodTitle: String {
+            String(localized: "analyzing.noFood.title", defaultValue: "Não encontramos comida nesta foto.", bundle: .module, comment: "The analysis found no food in the photo")
+        }
+        static var noFoodMessage: String {
+            String(localized: "analyzing.noFood.message", defaultValue: "Tire outra foto com o prato inteiro visível ou registre os alimentos você mesmo.", bundle: .module, comment: "What to do when no food was found")
+        }
     }
 
     enum Review {
@@ -103,6 +112,27 @@ enum L10n {
         }
         static var disclaimer: String {
             String(localized: "review.disclaimer", defaultValue: "Valores estimados. Uma foto não mostra o peso exato nem óleo, molhos ou preparo.", bundle: .module, comment: "Why the values are estimates")
+        }
+        static var demonstrationValues: String {
+            String(localized: "review.demonstrationValues", defaultValue: "Os valores nutricionais desta versão são de demonstração.", bundle: .module, comment: "The nutrition values come from demonstration data, not an official table")
+        }
+        static var toConfirmTitle: String {
+            String(localized: "review.toConfirm.title", defaultValue: "Confirme estes alimentos", bundle: .module, comment: "Section with foods the analysis couldn't match")
+        }
+        static var toConfirmSubtitle: String {
+            String(localized: "review.toConfirm.subtitle", defaultValue: "Não encontramos uma correspondência segura. Toque para escolher o alimento.", bundle: .module, comment: "How to resolve the foods to confirm")
+        }
+        static var notInCatalog: String {
+            String(localized: "review.toConfirm.notInCatalog", defaultValue: "Não está no catálogo. Toque para escolher.", bundle: .module, comment: "A recognized food with no catalog match")
+        }
+        static func looksLike(_ food: String) -> String {
+            String(localized: "review.toConfirm.looksLike", defaultValue: "Parece: \(food). Toque para confirmar.", bundle: .module, comment: "A close catalog food the user should confirm; the argument is its name")
+        }
+        static func couldBe(_ foods: String) -> String {
+            String(localized: "review.toConfirm.couldBe", defaultValue: "Pode ser: \(foods). Toque para escolher.", bundle: .module, comment: "Alternatives from the analysis; the argument is a list of names")
+        }
+        static func dismissUnmatched(_ name: String) -> String {
+            String(localized: "review.toConfirm.dismiss", defaultValue: "Descartar \(name)", bundle: .module, comment: "Accessibility label of the button that drops a food to confirm")
         }
         static var empty: String {
             String(localized: "review.empty", defaultValue: "Nenhum alimento na lista ainda. Adicione o que está no prato.", bundle: .module, comment: "The meal has no foods yet")
@@ -151,6 +181,9 @@ enum L10n {
         }
         static var remove: String {
             String(localized: "editor.remove", defaultValue: "Remover alimento", bundle: .module, comment: "Removes the food from the meal")
+        }
+        static func recognizedAs(_ name: String) -> String {
+            String(localized: "editor.recognizedAs", defaultValue: "Reconhecido na foto como “\(name)”.", bundle: .module, comment: "Which recognized food the user is picking a catalog food for; the argument is its name")
         }
         static func estimate(_ kcal: Int) -> String {
             String(localized: "editor.estimate", defaultValue: "Estimativa: \(kcal) kcal", bundle: .module, comment: "Live calorie estimate of the portion; the argument is the number")

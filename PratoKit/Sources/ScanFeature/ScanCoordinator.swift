@@ -15,6 +15,8 @@ public final class ScanCoordinator: Coordinator {
 
     public let router = Router<ScanRoute>()
     public let source: ScanSource
+    /// Whether analyzing sends the photo off the device; the photo check says so.
+    public var sendsPhotoToCloud: Bool { analyzer.sendsPhotoToCloud }
 
     /// JPEG of the plate once a photo was taken or picked.
     public private(set) var photo: Data?
@@ -71,7 +73,7 @@ public final class ScanCoordinator: Coordinator {
             router.path = [.confirm]
         case .skipPhotoRequested:
             photo = nil
-            showReview(with: [])
+            showReview(with: MealAnalysis(suggestions: []))
         case .closeRequested:
             parentCoordinator?.send(ScanEvent.cancelled)
         }
@@ -94,10 +96,13 @@ public final class ScanCoordinator: Coordinator {
         // A late result from an analysis the user already left is ignored.
         guard router.path.last == .analyzing else { return }
         switch event {
-        case .finished(let suggestions):
-            showReview(with: suggestions)
+        case .finished(let analysis):
+            showReview(with: analysis)
+        case .retakeRequested:
+            analyzingViewModel = nil
+            router.popToRoot()
         case .continueWithoutAnalysis:
-            showReview(with: [])
+            showReview(with: MealAnalysis(suggestions: []))
         }
     }
 
@@ -121,9 +126,10 @@ public final class ScanCoordinator: Coordinator {
 
     /// Replaces the analysis screen with the review, so going back from the review returns
     /// to the photo check instead of analyzing again.
-    private func showReview(with suggestions: [FoodSuggestion]) {
+    private func showReview(with analysis: MealAnalysis) {
         reviewViewModel = ReviewViewModel(
-            suggestions: suggestions,
+            suggestions: analysis.suggestions,
+            unmatched: analysis.unmatched,
             photo: photo,
             catalog: catalog,
             store: store,

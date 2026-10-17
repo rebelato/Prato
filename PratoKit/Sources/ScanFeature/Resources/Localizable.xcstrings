@@ -69,6 +69,40 @@
         }
       }
     },
+    "analyzing.noFood.message": {
+      "comment": "What to do when no food was found",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take another photo with the whole plate in view, or add the foods yourself."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tire outra foto com o prato inteiro visível ou registre os alimentos você mesmo."
+          }
+        }
+      }
+    },
+    "analyzing.noFood.title": {
+      "comment": "The analysis found no food in the photo",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We couldn't find food in this photo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não encontramos comida nesta foto."
+          }
+        }
+      }
+    },
     "analyzing.retry": {
       "comment": "Runs the analysis again",
       "localizations": {
@@ -375,6 +409,23 @@
         }
       }
     },
+    "confirm.cloudNotice": {
+      "comment": "Tells the user the photo leaves the device when analyzed",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you analyze, the photo is sent to Google's Gemini only to identify the foods. Prato doesn't keep the photo in the cloud."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ao analisar, a foto é enviada ao Gemini, do Google, só para identificar os alimentos. O Prato não guarda a foto na nuvem."
+          }
+        }
+      }
+    },
     "confirm.retake": {
       "comment": "Goes back to the camera",
       "localizations": {
@@ -562,6 +613,23 @@
         }
       }
     },
+    "editor.recognizedAs": {
+      "comment": "Which recognized food the user is picking a catalog food for; the argument is its name",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recognized in the photo as “%@”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconhecido na foto como “%@”."
+          }
+        }
+      }
+    },
     "editor.remove": {
       "comment": "Removes the food from the meal",
       "localizations": {
@@ -643,6 +711,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicionar alimento"
+          }
+        }
+      }
+    },
+    "review.demonstrationValues": {
+      "comment": "The nutrition values come from demonstration data, not an official table",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutrition values in this version are demonstration data."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os valores nutricionais desta versão são de demonstração."
           }
         }
       }
@@ -796,6 +881,108 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vamos conferir?"
+          }
+        }
+      }
+    },
+    "review.toConfirm.couldBe": {
+      "comment": "Alternatives from the analysis; the argument is a list of names",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could be: %@. Tap to pick."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pode ser: %@. Toque para escolher."
+          }
+        }
+      }
+    },
+    "review.toConfirm.dismiss": {
+      "comment": "Accessibility label of the button that drops a food to confirm",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dismiss %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descartar %@"
+          }
+        }
+      }
+    },
+    "review.toConfirm.looksLike": {
+      "comment": "A close catalog food the user should confirm; the argument is its name",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks like: %@. Tap to confirm."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parece: %@. Toque para confirmar."
+          }
+        }
+      }
+    },
+    "review.toConfirm.notInCatalog": {
+      "comment": "A recognized food with no catalog match",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not in the catalog. Tap to pick one."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não está no catálogo. Toque para escolher."
+          }
+        }
+      }
+    },
+    "review.toConfirm.subtitle": {
+      "comment": "How to resolve the foods to confirm",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We couldn't find a sure match. Tap to pick the food."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não encontramos uma correspondência segura. Toque para escolher o alimento."
+          }
+        }
+      }
+    },
+    "review.toConfirm.title": {
+      "comment": "Section with foods the analysis couldn't match",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirm these foods"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirme estes alimentos"
           }
         }
       }

@@ -1,4 +1,6 @@
 import Coordinator
+import Foundation
+import GeminiAnalysis
 import HistoryFeature
 import HomeFeature
 import MealKit
@@ -43,20 +45,37 @@ public final class AppCoordinator: Coordinator {
         self.store = store
     }
 
-    /// The app as it runs on a device: meals kept on disk.
+    /// The app as it runs on a device: meals kept on disk, photos analyzed by Gemini.
     ///
-    /// If the database can't be opened, the app still starts, keeping meals in memory
-    /// for this session, rather than crashing at launch.
-    public static func live() -> AppCoordinator {
+    /// - If the database can't be opened, meals stay in memory for this session instead of
+    ///   crashing at launch.
+    /// - Gemini is used only when Firebase is configured (`GoogleService-Info.plist` in the app)
+    ///   and the `PratoMockAnalysis` launch argument isn't set; otherwise the mock analyzer runs
+    ///   and no photo leaves the device.
+    public static func live(defaults: UserDefaults = .standard) -> AppCoordinator {
+        let logger = Logger(subsystem: "com.rebelato.prato", category: "setup")
+
         let store: any MealStoring
         do {
             store = try SwiftDataMealStore.make()
         } catch {
-            Logger(subsystem: "com.rebelato.prato", category: "storage")
-                .error("Could not open the meal database: \(error.localizedDescription, privacy: .public)")
+            logger.error("Could not open the meal database: \(error.localizedDescription, privacy: .public)")
             store = InMemoryMealStore()
         }
-        return AppCoordinator(store: store)
+
+        let catalog = FoodCatalog.development
+        let analyzer: any MealAnalyzing
+        if defaults.bool(forKey: "PratoMockAnalysis") {
+            logger.notice("Mock analysis forced by launch argument")
+            analyzer = MockMealAnalyzer()
+        } else if FirebaseBootstrap.configure() {
+            analyzer = GeminiMealAnalyzer(catalog: catalog)
+        } else {
+            logger.notice("GoogleService-Info.plist not found; using mock analysis")
+            analyzer = MockMealAnalyzer()
+        }
+
+        return AppCoordinator(analyzer: analyzer, catalog: catalog, store: store)
     }
 
     /// The scan flow on screen, if any.
