@@ -33,6 +33,10 @@ public struct ScanFlowView: View {
             if let viewModel = coordinator.reviewViewModel {
                 ReviewView(viewModel: viewModel)
             }
+        case .saved:
+            if let draft = coordinator.savedDraft {
+                SavedView(draft: draft) { coordinator.send($0) }
+            }
         }
     }
 }

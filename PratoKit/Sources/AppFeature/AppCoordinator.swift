@@ -63,8 +63,10 @@ public final class AppCoordinator: Coordinator {
 
         case let event as ScanEvent:
             switch event {
-            case .finished(let draft):
+            case .mealSaved(let draft):
                 lastSavedMeal = draft
+            case .finished:
+                selectedTab = .today
                 closeScan()
             case .cancelled:
                 closeScan()

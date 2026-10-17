@@ -75,16 +75,29 @@ struct AppCoordinatorTests {
         #expect(coordinator.lastSavedMeal == nil)
     }
 
-    @Test func finishingScanKeepsTheMealAndClosesTheFlow() throws {
+    @Test func savedMealIsKeptWhileTheFlowStaysOpen() throws {
         let coordinator = makeCoordinator()
         coordinator.select(.scan)
         let scan = try #require(coordinator.activeScan)
         let draft = MealDraft(kind: .lunch, portions: [], photo: nil, date: .now)
 
-        scan.send(ScanEvent.finished(draft))
+        scan.send(ScanEvent.mealSaved(draft))
 
         #expect(coordinator.lastSavedMeal == draft)
+        #expect(coordinator.activeScan === scan)
+    }
+
+    @Test func finishingScanClosesTheFlowAndShowsToday() throws {
+        let coordinator = makeCoordinator()
+        coordinator.select(.history)
+        coordinator.select(.scan)
+        let scan = try #require(coordinator.activeScan)
+
+        scan.send(ScanEvent.finished)
+
         #expect(coordinator.activeScan == nil)
+        #expect(coordinator.childCoordinators.isEmpty)
+        #expect(coordinator.selectedTab == .today)
     }
 
     @Test func unrelatedEventsAreNotHandled() {

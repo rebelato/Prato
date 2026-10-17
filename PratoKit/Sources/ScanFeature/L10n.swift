@@ -159,6 +159,30 @@ enum L10n {
         }
     }
 
+    enum Saved {
+        static var eyebrow: String {
+            String(localized: "saved.eyebrow", defaultValue: "Refeição registrada", bundle: .module, comment: "Small label above the confirmation title")
+        }
+        static func title(_ kind: MealKind) -> String {
+            switch kind {
+            case .breakfast:
+                String(localized: "saved.title.breakfast", defaultValue: "Café da manhã salvo.", bundle: .module, comment: "Confirmation title after saving a breakfast")
+            case .lunch:
+                String(localized: "saved.title.lunch", defaultValue: "Almoço salvo.", bundle: .module, comment: "Confirmation title after saving a lunch")
+            case .snack:
+                String(localized: "saved.title.snack", defaultValue: "Lanche salvo.", bundle: .module, comment: "Confirmation title after saving a snack")
+            case .dinner:
+                String(localized: "saved.title.dinner", defaultValue: "Jantar salvo.", bundle: .module, comment: "Confirmation title after saving a dinner")
+            }
+        }
+        static func loggedAt(_ time: String) -> String {
+            String(localized: "saved.loggedAt", defaultValue: "Registrado às \(time).", bundle: .module, comment: "When the meal was logged; the argument is a time such as 12:30")
+        }
+        static var done: String {
+            String(localized: "saved.done", defaultValue: "Voltar para hoje", bundle: .module, comment: "Closes the flow and shows today's diary")
+        }
+    }
+
     static func mealKind(_ kind: MealKind) -> String {
         switch kind {
         case .breakfast:
