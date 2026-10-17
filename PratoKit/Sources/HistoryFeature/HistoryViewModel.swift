@@ -26,6 +26,8 @@ public final class HistoryViewModel {
     public private(set) var weekMeals: [Meal] = []
     /// False until the first load finishes, so the empty state doesn't flash.
     public private(set) var hasLoaded = false
+    /// The calendar sheet that jumps to any past day.
+    public var isDayPickerPresented = false
 
     private let store: any MealStoring
     private let now: () -> Date
@@ -48,6 +50,9 @@ public final class HistoryViewModel {
     }
 
     private var today: Date { calendar.startOfDay(for: now()) }
+
+    /// The last day the calendar offers.
+    public var lastSelectableDay: Date { today }
 
     // MARK: Week strip
 
@@ -126,11 +131,29 @@ public final class HistoryViewModel {
         onEvent(.scanRequested)
     }
 
-    /// Moves to the week of `date`, selecting today if it's in that week, else the week's last day.
-    private func show(weekContaining date: Date) async {
+    /// The week label in the middle of the navigator opens the calendar.
+    public func weekTitleTapped() {
+        isDayPickerPresented = true
+    }
+
+    /// A day chosen in the calendar: closes it and shows that day, in its week.
+    /// Days after today fall back to today.
+    public func dayPicked(_ date: Date) async {
+        isDayPickerPresented = false
+        let day = min(calendar.startOfDay(for: date), today)
+        guard !week.contains(day) else {
+            selectedDay = day
+            return
+        }
+        await show(weekContaining: day, selecting: day)
+    }
+
+    /// Moves to the week of `date` and selects `day`; without one, today if it's in that week,
+    /// else the week's last day.
+    private func show(weekContaining date: Date, selecting day: Date? = nil) async {
         week = calendar.weekInterval(containing: date)
         let today = self.today
-        selectedDay = week.contains(today) ? today : weekLastDay
+        selectedDay = day ?? (week.contains(today) ? today : weekLastDay)
         weekMeals = []
         await load()
     }

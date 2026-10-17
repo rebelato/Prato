@@ -75,7 +75,15 @@ public struct HomeView: View {
             Button {
                 viewModel.scanTapped()
             } label: {
-                Label(L10n.ScanCard.scanButton, systemImage: "viewfinder")
+                Label {
+                    Text(L10n.ScanCard.scanButton)
+                } icon: {
+                    PratoImage.scan
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                }
             }
             .buttonStyle(.pratoPrimary)
             galleryButton
@@ -129,20 +137,22 @@ public struct HomeView: View {
     }
 
     private var emptyToday: some View {
-        HStack(alignment: .top, spacing: 16) {
-            Image(systemName: "fork.knife")
-                .font(.title2)
-                .foregroundStyle(PratoColor.textSecondary)
+        VStack(spacing: 4) {
+            PratoImage.emptyDay
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 220)
+                .padding(.bottom, 8)
                 .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(L10n.Today.emptyTitle)
-                    .font(PratoFont.bodyEmphasized)
-                    .foregroundStyle(PratoColor.textPrimary)
-                Text(L10n.Today.emptySubtitle)
-                    .font(PratoFont.secondary)
-                    .foregroundStyle(PratoColor.textSecondary)
-            }
+            Text(L10n.Today.emptyTitle)
+                .font(PratoFont.bodyEmphasized)
+                .foregroundStyle(PratoColor.textPrimary)
+            Text(L10n.Today.emptySubtitle)
+                .font(PratoFont.secondary)
+                .foregroundStyle(PratoColor.textSecondary)
         }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity)
         .accessibilityElement(children: .combine)
     }
 }

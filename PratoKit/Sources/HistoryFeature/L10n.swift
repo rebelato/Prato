@@ -38,4 +38,16 @@ enum L10n {
     static var scan: String {
         String(localized: "history.scan", defaultValue: "Escanear refeição", bundle: .module, comment: "Opens the camera to log a meal")
     }
+    static var pickDay: String {
+        String(localized: "history.pickDay", defaultValue: "Escolher dia", bundle: .module, comment: "Title of the calendar sheet that jumps to a day")
+    }
+    static var pickDayHint: String {
+        String(localized: "history.pickDay.hint", defaultValue: "Abre o calendário para escolher um dia.", bundle: .module, comment: "Accessibility hint of the week label, which opens the calendar")
+    }
+    static var pickDayToday: String {
+        String(localized: "history.pickDay.today", defaultValue: "Hoje", bundle: .module, comment: "Calendar sheet button that jumps to today")
+    }
+    static var pickDayCancel: String {
+        String(localized: "history.pickDay.cancel", defaultValue: "Cancelar", bundle: .module, comment: "Closes the calendar sheet without changes")
+    }
 }

@@ -135,6 +135,52 @@ struct HistoryViewModelTests {
         #expect(viewModel.week.start == date(day: 12))
     }
 
+    @Test func weekTitleOpensTheCalendar() {
+        let viewModel = makeViewModel()
+
+        viewModel.weekTitleTapped()
+
+        #expect(viewModel.isDayPickerPresented)
+        #expect(viewModel.lastSelectableDay == date(day: 16))
+    }
+
+    @Test func pickingADayInAnotherWeekShowsThatWeekAndDay() async {
+        let firstOfOctober = meal(.lunch, day: 1, hour: 12)
+        let viewModel = makeViewModel(meals: [firstOfOctober, meal(.lunch, day: 16, hour: 12)])
+        await viewModel.load()
+        viewModel.weekTitleTapped()
+
+        await viewModel.dayPicked(date(day: 1, hour: 9))
+
+        #expect(!viewModel.isDayPickerPresented)
+        #expect(viewModel.week.start == date(month: 9, day: 28))
+        #expect(viewModel.selectedDay == date(day: 1))
+        #expect(viewModel.weekMeals == [firstOfOctober])
+        #expect(viewModel.selectedDayMeals == [firstOfOctober])
+    }
+
+    @Test func pickingADayInTheSameWeekKeepsItsMeals() async {
+        let monday = meal(.lunch, day: 12, hour: 12)
+        let viewModel = makeViewModel(meals: [monday])
+        await viewModel.load()
+
+        await viewModel.dayPicked(date(day: 12))
+
+        #expect(viewModel.week.start == date(day: 12))
+        #expect(viewModel.selectedDay == date(day: 12))
+        #expect(viewModel.weekMeals == [monday])
+    }
+
+    @Test func pickingAFutureDayFallsBackToToday() async {
+        let viewModel = makeViewModel()
+        await viewModel.previousWeekTapped()
+
+        await viewModel.dayPicked(date(day: 25))
+
+        #expect(viewModel.week.start == date(day: 12))
+        #expect(viewModel.selectedDay == date(day: 16))
+    }
+
     @Test func scanButtonSendsEvent() {
         var events: [HistoryEvent] = []
         let viewModel = makeViewModel { events.append($0) }

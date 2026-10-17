@@ -168,6 +168,74 @@
         }
       }
     },
+    "history.pickDay": {
+      "comment": "Title of the calendar sheet that jumps to a day",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a Day"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher dia"
+          }
+        }
+      }
+    },
+    "history.pickDay.cancel": {
+      "comment": "Closes the calendar sheet without changes",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
+        }
+      }
+    },
+    "history.pickDay.hint": {
+      "comment": "Accessibility hint of the week label, which opens the calendar",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens the calendar to choose a day."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre o calendário para escolher um dia."
+          }
+        }
+      }
+    },
+    "history.pickDay.today": {
+      "comment": "Calendar sheet button that jumps to today",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoje"
+          }
+        }
+      }
+    },
     "history.previousWeek": {
       "comment": "Accessibility label of the previous week button",
       "localizations": {

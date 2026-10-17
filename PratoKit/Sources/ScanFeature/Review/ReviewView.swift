@@ -116,10 +116,7 @@ struct ReviewView: View {
                     Button {
                         viewModel.dismissUnmatched(item.id)
                     } label: {
-                        Image(systemName: "xmark")
-                            .font(.footnote.weight(.semibold))
-                            .foregroundStyle(PratoColor.textSecondary)
-                            .frame(width: 44, height: 44)
+                        CloseIcon(size: 14)
                     }
                     .accessibilityLabel(L10n.Review.dismissUnmatched(item.name))
                 }
