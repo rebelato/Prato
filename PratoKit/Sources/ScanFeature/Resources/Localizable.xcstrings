@@ -1,0 +1,1281 @@
+{
+  "sourceLanguage": "pt-BR",
+  "strings": {
+    "analyzing.failed.message": {
+      "comment": "Options after a failed analysis",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again or add the foods yourself."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tente de novo ou registre os alimentos você mesmo."
+          }
+        }
+      }
+    },
+    "analyzing.failed.title": {
+      "comment": "The analysis failed",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't analyze the photo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível analisar a foto."
+          }
+        }
+      }
+    },
+    "analyzing.hint": {
+      "comment": "Reassures that suggestions can be edited",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can correct everything next."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você poderá corrigir tudo a seguir."
+          }
+        }
+      }
+    },
+    "analyzing.manual": {
+      "comment": "Goes to the review with no suggested foods",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Foods Manually"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registrar sem análise"
+          }
+        }
+      }
+    },
+    "analyzing.noFood.message": {
+      "comment": "What to do when no food was found",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take another photo with the whole plate in view, or add the foods yourself."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tire outra foto com o prato inteiro visível ou registre os alimentos você mesmo."
+          }
+        }
+      }
+    },
+    "analyzing.noFood.title": {
+      "comment": "The analysis found no food in the photo",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We couldn't find food in this photo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não encontramos comida nesta foto."
+          }
+        }
+      }
+    },
+    "analyzing.retry": {
+      "comment": "Runs the analysis again",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try Again"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tentar de novo"
+          }
+        }
+      }
+    },
+    "analyzing.status": {
+      "comment": "What the analysis is doing",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggesting foods and portions."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerindo alimentos e porções."
+          }
+        }
+      }
+    },
+    "analyzing.title": {
+      "comment": "Title while the photo is analyzed",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Getting to know your plate…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conhecendo seu prato…"
+          }
+        }
+      }
+    },
+    "capture.denied.message": {
+      "comment": "How to continue without camera access",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow access in Settings or pick a photo from your library."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permita o acesso nos Ajustes ou escolha uma foto da galeria."
+          }
+        }
+      }
+    },
+    "capture.denied.openSettings": {
+      "comment": "Opens the app's page in Settings",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes"
+          }
+        }
+      }
+    },
+    "capture.denied.title": {
+      "comment": "Camera permission was denied",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No camera access"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem acesso à câmera"
+          }
+        }
+      }
+    },
+    "capture.gallery": {
+      "comment": "Opens the photo library",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Library"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Galeria"
+          }
+        }
+      }
+    },
+    "capture.guide": {
+      "comment": "Label over the camera preview",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep the plate inside the circle"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantenha o prato dentro do círculo"
+          }
+        }
+      }
+    },
+    "capture.loadFailed": {
+      "comment": "A photo from the library could not be read",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't open that photo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível abrir essa foto."
+          }
+        }
+      }
+    },
+    "capture.shutter": {
+      "comment": "Accessibility label of the shutter button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take Photo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirar foto"
+          }
+        }
+      }
+    },
+    "capture.subtitle": {
+      "comment": "Tips for a good photo",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shoot from above, in good light, with every food in view."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografe de cima, com boa luz e todos os alimentos visíveis."
+          }
+        }
+      }
+    },
+    "capture.title": {
+      "comment": "Title of the camera screen",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frame your plate"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enquadre seu prato"
+          }
+        }
+      }
+    },
+    "capture.unavailable": {
+      "comment": "Shown on devices without a camera, such as the Simulator",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No camera on this device. The button uses a sample photo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Câmera indisponível neste aparelho. O botão usa uma foto de exemplo."
+          }
+        }
+      }
+    },
+    "capture.withoutPhoto": {
+      "comment": "Logs a meal without a photo",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Photo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem foto"
+          }
+        }
+      }
+    },
+    "common.close": {
+      "comment": "Closes the scan flow",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fechar"
+          }
+        }
+      }
+    },
+    "common.done": {
+      "comment": "Hides the number keyboard",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "common.ok": {
+      "comment": "Dismisses an alert",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "confirm.analyze": {
+      "comment": "Starts the analysis of the photo",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyze Plate"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisar prato"
+          }
+        }
+      }
+    },
+    "confirm.cloudNotice": {
+      "comment": "Tells the user the photo leaves the device when analyzed",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you analyze, the photo is sent to Google's Gemini only to identify the foods. Prato doesn't keep the photo in the cloud."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ao analisar, a foto é enviada ao Gemini, do Google, só para identificar os alimentos. O Prato não guarda a foto na nuvem."
+          }
+        }
+      }
+    },
+    "confirm.retake": {
+      "comment": "Goes back to the camera",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retake Photo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirar outra foto"
+          }
+        }
+      }
+    },
+    "confirm.subtitle": {
+      "comment": "Why the photo should be sharp",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A sharp photo helps suggest the foods on your plate."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma foto nítida ajuda a sugerir os alimentos do seu prato."
+          }
+        }
+      }
+    },
+    "confirm.title": {
+      "comment": "Title of the photo check screen",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is everything in view?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ficou tudo visível?"
+          }
+        }
+      }
+    },
+    "editor.add": {
+      "comment": "Adds the new food to the meal",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar"
+          }
+        }
+      }
+    },
+    "editor.addTitle": {
+      "comment": "Title of the sheet that adds a food",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar alimento"
+          }
+        }
+      }
+    },
+    "editor.adjustTitle": {
+      "comment": "Title of the sheet that edits a food",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjust Food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustar alimento"
+          }
+        }
+      }
+    },
+    "editor.apply": {
+      "comment": "Saves the edited food",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apply"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplicar ajuste"
+          }
+        }
+      }
+    },
+    "editor.cancel": {
+      "comment": "Closes the sheet without changes",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
+        }
+      }
+    },
+    "editor.chooseFood": {
+      "comment": "Food field before a food is chosen; opens the food list",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher alimento"
+          }
+        }
+      }
+    },
+    "editor.couldBe": {
+      "comment": "Alternatives the analysis gave for the recognized food; the argument is a list of names",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It could also be: %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Também pode ser: %@."
+          }
+        }
+      }
+    },
+    "editor.estimate": {
+      "comment": "Live calorie estimate of the portion; the argument is the number",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimate: %lld kcal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimativa: %lld kcal"
+          }
+        }
+      }
+    },
+    "editor.food": {
+      "comment": "Label of the food picker",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimento"
+          }
+        }
+      }
+    },
+    "editor.hint": {
+      "comment": "Weigh food cooked, as eaten",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use the weight as eaten."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use o peso pronto para consumo."
+          }
+        }
+      }
+    },
+    "editor.recognizedAs": {
+      "comment": "Which recognized food the user is picking a catalog food for; the argument is its name",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recognized in the photo as “%@”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconhecido na foto como “%@”."
+          }
+        }
+      }
+    },
+    "editor.remove": {
+      "comment": "Removes the food from the meal",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover alimento"
+          }
+        }
+      }
+    },
+    "editor.step.add": {
+      "comment": "Accessibility label of a button that adds grams",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add %lld grams"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais %lld gramas"
+          }
+        }
+      }
+    },
+    "editor.step.remove": {
+      "comment": "Accessibility label of a button that removes grams",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove %lld grams"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menos %lld gramas"
+          }
+        }
+      }
+    },
+    "editor.weight": {
+      "comment": "Label of the weight field",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Portion weight in grams"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso da porção em gramas"
+          }
+        }
+      }
+    },
+    "picker.all": {
+      "comment": "Section with the whole food catalog",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All foods"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos os alimentos"
+          }
+        }
+      }
+    },
+    "picker.emptyHint": {
+      "comment": "Explains why a search found nothing",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The food list is still small. Try another name or pick the closest one."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A base de alimentos ainda é pequena. Tente outro nome ou escolha o mais parecido."
+          }
+        }
+      }
+    },
+    "picker.emptyTitle": {
+      "comment": "Shown when the search finds no food",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No foods found"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum alimento encontrado"
+          }
+        }
+      }
+    },
+    "picker.per100g": {
+      "comment": "Calories per 100 g of a food in the list; the argument is like '128 kcal'",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per 100 g"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a cada 100 g"
+          }
+        }
+      }
+    },
+    "picker.searchPrompt": {
+      "comment": "Placeholder of the food search field",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search foods"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar alimento"
+          }
+        }
+      }
+    },
+    "picker.similar": {
+      "comment": "Section of foods similar to the one recognized in the photo",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Similar to what was recognized"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parecidos com o reconhecido"
+          }
+        }
+      }
+    },
+    "picker.title": {
+      "comment": "Title of the searchable food list",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher alimento"
+          }
+        }
+      }
+    },
+    "review.addFood": {
+      "comment": "Adds a food by hand",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Food"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar alimento"
+          }
+        }
+      }
+    },
+    "review.demonstrationValues": {
+      "comment": "The nutrition values come from demonstration data, not an official table",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutrition values in this version are demonstration data."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os valores nutricionais desta versão são de demonstração."
+          }
+        }
+      }
+    },
+    "review.disclaimer": {
+      "comment": "Why the values are estimates",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated values. A photo can't show the exact weight, or oil, sauces and cooking."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valores estimados. Uma foto não mostra o peso exato nem óleo, molhos ou preparo."
+          }
+        }
+      }
+    },
+    "review.empty": {
+      "comment": "The meal has no foods yet",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No foods yet. Add what's on your plate."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum alimento na lista ainda. Adicione o que está no prato."
+          }
+        }
+      }
+    },
+    "review.item.hint": {
+      "comment": "Accessibility hint on a food row",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to adjust."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque para ajustar."
+          }
+        }
+      }
+    },
+    "review.item.kcal": {
+      "comment": "Calories of one food; the argument is the number",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kcal · estimated portion"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kcal · porção estimada"
+          }
+        }
+      }
+    },
+    "review.mealKind": {
+      "comment": "Label of the meal type picker",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeição"
+          }
+        }
+      }
+    },
+    "review.save": {
+      "comment": "Saves the reviewed meal",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save Meal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salvar refeição"
+          }
+        }
+      }
+    },
+    "review.saveFailed": {
+      "comment": "Saving the meal failed",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't save the meal. Please try again."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível salvar a refeição. Tente de novo."
+          }
+        }
+      }
+    },
+    "review.subtitle": {
+      "comment": "How to edit the suggested foods",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a food to fix its name or adjust its weight."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque em um alimento para corrigir o nome ou ajustar o peso."
+          }
+        }
+      }
+    },
+    "review.title": {
+      "comment": "Title of the review screen",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Does this look right?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vamos conferir?"
+          }
+        }
+      }
+    },
+    "review.toConfirm.couldBe": {
+      "comment": "Alternatives from the analysis; the argument is a list of names",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could be: %@. Tap to pick."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pode ser: %@. Toque para escolher."
+          }
+        }
+      }
+    },
+    "review.toConfirm.dismiss": {
+      "comment": "Accessibility label of the button that drops a food to confirm",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dismiss %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descartar %@"
+          }
+        }
+      }
+    },
+    "review.toConfirm.looksLike": {
+      "comment": "A close catalog food the user should confirm; the argument is its name",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks like: %@. Tap to confirm."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parece: %@. Toque para confirmar."
+          }
+        }
+      }
+    },
+    "review.toConfirm.notInCatalog": {
+      "comment": "A recognized food with no catalog match",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not in the catalog. Tap to pick one."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não está no catálogo. Toque para escolher."
+          }
+        }
+      }
+    },
+    "review.toConfirm.subtitle": {
+      "comment": "How to resolve the foods to confirm",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We couldn't find a sure match. Tap to pick the food."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não encontramos uma correspondência segura. Toque para escolher o alimento."
+          }
+        }
+      }
+    },
+    "review.toConfirm.title": {
+      "comment": "Section with foods the analysis couldn't match",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirm these foods"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirme estes alimentos"
+          }
+        }
+      }
+    },
+    "saved.done": {
+      "comment": "Closes the flow and shows today's diary",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to Today"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltar para hoje"
+          }
+        }
+      }
+    },
+    "saved.eyebrow": {
+      "comment": "Small label above the confirmation title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal logged"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeição registrada"
+          }
+        }
+      }
+    },
+    "saved.loggedAt": {
+      "comment": "When the meal was logged; the argument is a time such as 12:30",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logged at %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registrado às %@."
+          }
+        }
+      }
+    },
+    "saved.title.breakfast": {
+      "comment": "Confirmation title after saving a breakfast",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breakfast saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café da manhã salvo."
+          }
+        }
+      }
+    },
+    "saved.title.dinner": {
+      "comment": "Confirmation title after saving a dinner",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinner saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jantar salvo."
+          }
+        }
+      }
+    },
+    "saved.title.free": {
+      "comment": "Confirmation title after saving a free meal",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free meal saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeição livre salva."
+          }
+        }
+      }
+    },
+    "saved.title.lunch": {
+      "comment": "Confirmation title after saving a lunch",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lunch saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Almoço salvo."
+          }
+        }
+      }
+    },
+    "saved.title.snack": {
+      "comment": "Confirmation title after saving a snack",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snack saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lanche salvo."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

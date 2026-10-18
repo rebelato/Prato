@@ -1,4 +1,5 @@
 import Foundation
+import MealKit
 
 /// Texts of Hoje, read from this module's `Localizable.xcstrings`.
 ///
@@ -41,6 +42,9 @@ enum L10n {
         }
         static var emptySubtitle: String {
             String(localized: "home.today.empty.subtitle", defaultValue: "Seu próximo prato começa por aqui.", bundle: .module, comment: "Encouragement under the empty state")
+        }
+        static func mealCount(_ count: Int) -> String {
+            String(localized: "home.today.mealCount", defaultValue: "\(count) refeições", bundle: .module, comment: "How many meals were logged today; plural by the number")
         }
     }
 }

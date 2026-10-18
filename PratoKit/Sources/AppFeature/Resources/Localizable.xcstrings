@@ -1,142 +1,57 @@
 {
-  "sourceLanguage" : "pt-BR",
-  "strings" : {
-    "history.placeholder.subtitle" : {
-      "comment" : "The history screen is not built yet",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Coming soon: your meals, day by day."
+  "sourceLanguage": "pt-BR",
+  "strings": {
+    "tab.history": {
+      "comment": "Tab bar item for past meals",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Em breve: seus registros, dia a dia."
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Histórico"
           }
         }
       }
     },
-    "history.placeholder.title" : {
-      "comment" : "Title of the temporary history screen",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History"
+    "tab.scan": {
+      "comment": "Tab bar item that opens the camera",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Histórico"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanear"
           }
         }
       }
     },
-    "scan.placeholder.close" : {
-      "comment" : "Closes the temporary scan screen",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close"
+    "tab.today": {
+      "comment": "Tab bar item for today's diary",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fechar"
-          }
-        }
-      }
-    },
-    "scan.placeholder.subtitle" : {
-      "comment" : "The scan flow is not built yet",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The camera is coming soon."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A câmera chega em breve."
-          }
-        }
-      }
-    },
-    "scan.placeholder.title" : {
-      "comment" : "Title of the temporary scan screen",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scan Meal"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escanear refeição"
-          }
-        }
-      }
-    },
-    "tab.history" : {
-      "comment" : "Tab bar item for past meals",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Histórico"
-          }
-        }
-      }
-    },
-    "tab.scan" : {
-      "comment" : "Tab bar item that opens the camera",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scan"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escanear"
-          }
-        }
-      }
-    },
-    "tab.today" : {
-      "comment" : "Tab bar item for today's diary",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Today"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hoje"
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoje"
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

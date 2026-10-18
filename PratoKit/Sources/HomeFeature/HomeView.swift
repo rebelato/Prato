@@ -1,5 +1,6 @@
-import SwiftUI
 import DesignSystem
+import MealKit
+import SwiftUI
 
 /// Hoje: the entry to a scan and the meals logged today.
 public struct HomeView: View {
@@ -15,18 +16,17 @@ public struct HomeView: View {
             VStack(alignment: .leading, spacing: 0) {
                 logo
                 header
-                    .padding(.top, 32)
+                    .padding(.top, 8)
                 scanCard
-                    .padding(.top, 32)
-                galleryButton
                     .padding(.top, 16)
                 today
-                    .padding(.top, 40)
+                    .padding(.top, 16)
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 16)
         }
         .background(PratoColor.background)
+        .task { await viewModel.load() }
     }
 
     private var logo: some View {
@@ -75,9 +75,19 @@ public struct HomeView: View {
             Button {
                 viewModel.scanTapped()
             } label: {
-                Label(L10n.ScanCard.scanButton, systemImage: "viewfinder")
+                Label {
+                    Text(L10n.ScanCard.scanButton)
+                } icon: {
+                    PratoImage.scan
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                }
             }
             .buttonStyle(.pratoPrimary)
+            galleryButton
+                .padding(.top, 16)
         }
         .padding(24)
         .background(PratoColor.softSurface, in: .rect(cornerRadius: 28))
@@ -94,36 +104,73 @@ public struct HomeView: View {
 
     private var today: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(L10n.Today.title)
-                .font(PratoFont.sectionTitle)
-                .foregroundStyle(PratoColor.textPrimary)
-                .accessibilityAddTraits(.isHeader)
-            Divider()
-                .overlay(PratoColor.border)
-            HStack(alignment: .top, spacing: 16) {
-                Image(systemName: "fork.knife")
-                    .font(.title2)
-                    .foregroundStyle(PratoColor.textSecondary)
-                    .accessibilityHidden(true)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.Today.emptyTitle)
-                        .font(PratoFont.bodyEmphasized)
-                        .foregroundStyle(PratoColor.textPrimary)
-                    Text(L10n.Today.emptySubtitle)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L10n.Today.title)
+                    .font(PratoFont.sectionTitle)
+                    .foregroundStyle(PratoColor.textPrimary)
+                    .accessibilityAddTraits(.isHeader)
+                if !viewModel.todayMeals.isEmpty {
+                    Text(verbatim: "\(L10n.Today.mealCount(viewModel.todayMeals.count)) · \(Kcal.format(viewModel.todayTotals.kcal))")
                         .font(PratoFont.secondary)
                         .foregroundStyle(PratoColor.textSecondary)
                 }
             }
-            .accessibilityElement(children: .combine)
+            Divider()
+                .overlay(PratoColor.border)
+
+            if viewModel.todayMeals.isEmpty {
+                if viewModel.hasLoaded {
+                    emptyToday
+                }
+            } else {
+                VStack(spacing: 0) {
+                    ForEach(viewModel.todayMeals) { meal in
+                        MealRowView(
+                            title: meal.kind.localizedName,
+                            detail: "\(meal.date.formatted(date: .omitted, time: .shortened)) · \(Kcal.format(meal.totals.kcal))",
+                            photo: meal.photo
+                        )
+                    }
+                }
+            }
         }
+    }
+
+    private var emptyToday: some View {
+        VStack(spacing: 4) {
+            PratoImage.emptyDay
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 220)
+                .padding(.bottom, 8)
+                .accessibilityHidden(true)
+            Text(L10n.Today.emptyTitle)
+                .font(PratoFont.bodyEmphasized)
+                .foregroundStyle(PratoColor.textPrimary)
+            Text(L10n.Today.emptySubtitle)
+                .font(PratoFont.secondary)
+                .foregroundStyle(PratoColor.textSecondary)
+        }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity)
+        .accessibilityElement(children: .combine)
     }
 }
 
 #Preview("Claro") {
-    HomeView(viewModel: HomeViewModel { _ in })
+    HomeView(viewModel: HomeViewModel(store: InMemoryMealStore()) { _ in })
+}
+
+#Preview("Com refeições") {
+    let rice = FoodCatalog.development.foods[0]
+    let store = InMemoryMealStore(meals: [
+        Meal(kind: .breakfast, date: .now.addingTimeInterval(-4 * 3600), portions: [FoodPortion(food: rice, grams: 80)], photo: nil),
+        Meal(kind: .lunch, date: .now, portions: [FoodPortion(food: rice, grams: 150)], photo: nil)
+    ])
+    return HomeView(viewModel: HomeViewModel(store: store) { _ in })
 }
 
 #Preview("Escuro") {
-    HomeView(viewModel: HomeViewModel { _ in })
+    HomeView(viewModel: HomeViewModel(store: InMemoryMealStore()) { _ in })
         .preferredColorScheme(.dark)
 }

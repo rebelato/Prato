@@ -1,0 +1,326 @@
+{
+  "sourceLanguage": "pt-BR",
+  "strings": {
+    "history.average": {
+      "comment": "Average calories per logged day; the argument is a value such as 1.623 kcal",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Average: %@/day"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Média: %@/dia"
+          }
+        }
+      }
+    },
+    "history.day.empty": {
+      "comment": "The selected day has no meals",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No meals on this day."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma refeição neste dia."
+          }
+        }
+      }
+    },
+    "history.empty.message": {
+      "comment": "How to fill the empty week",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log a meal to see it here."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registre uma refeição para vê-la aqui."
+          }
+        }
+      }
+    },
+    "history.empty.title": {
+      "comment": "The week on screen has no meals",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No meals this week"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma refeição nesta semana"
+          }
+        }
+      }
+    },
+    "history.loggedDays": {
+      "comment": "How many days of the week have meals; plural by the number",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld day logged"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld days logged"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dia registrado"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dias registrados"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "history.mealCount": {
+      "comment": "How many meals on a day; plural by the number",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld meal"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld meals"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld refeição"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld refeições"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "history.nextWeek": {
+      "comment": "Accessibility label of the next week button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next week"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próxima semana"
+          }
+        }
+      }
+    },
+    "history.pickDay": {
+      "comment": "Title of the calendar sheet that jumps to a day",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a Day"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher dia"
+          }
+        }
+      }
+    },
+    "history.pickDay.cancel": {
+      "comment": "Closes the calendar sheet without changes",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
+        }
+      }
+    },
+    "history.pickDay.hint": {
+      "comment": "Accessibility hint of the week label, which opens the calendar",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens the calendar to choose a day."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre o calendário para escolher um dia."
+          }
+        }
+      }
+    },
+    "history.pickDay.today": {
+      "comment": "Calendar sheet button that jumps to today",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoje"
+          }
+        }
+      }
+    },
+    "history.previousWeek": {
+      "comment": "Accessibility label of the previous week button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous week"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana anterior"
+          }
+        }
+      }
+    },
+    "history.scan": {
+      "comment": "Opens the camera to log a meal",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan Meal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanear refeição"
+          }
+        }
+      }
+    },
+    "history.subtitle": {
+      "comment": "Text under the history title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your week at the table, day by day."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua semana à mesa, dia a dia."
+          }
+        }
+      }
+    },
+    "history.title": {
+      "comment": "Title of the history screen",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Histórico"
+          }
+        }
+      }
+    },
+    "history.weekTotal": {
+      "comment": "Label at the top of the week's calorie card",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week total"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total da semana"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

@@ -27,6 +27,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = "pt-BR"
+      region = "BR"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
@@ -47,6 +49,56 @@
                BlueprintIdentifier = "AppFeatureTests"
                BuildableName = "AppFeatureTests"
                BlueprintName = "AppFeatureTests"
+               ReferencedContainer = "container:PratoKit">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "MealKitTests"
+               BuildableName = "MealKitTests"
+               BlueprintName = "MealKitTests"
+               ReferencedContainer = "container:PratoKit">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ScanFeatureTests"
+               BuildableName = "ScanFeatureTests"
+               BlueprintName = "ScanFeatureTests"
+               ReferencedContainer = "container:PratoKit">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "MealStoreTests"
+               BuildableName = "MealStoreTests"
+               BlueprintName = "MealStoreTests"
+               ReferencedContainer = "container:PratoKit">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "HistoryFeatureTests"
+               BuildableName = "HistoryFeatureTests"
+               BlueprintName = "HistoryFeatureTests"
+               ReferencedContainer = "container:PratoKit">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FoodRecognitionTests"
+               BuildableName = "FoodRecognitionTests"
+               BlueprintName = "FoodRecognitionTests"
                ReferencedContainer = "container:PratoKit">
             </BuildableReference>
          </TestableReference>

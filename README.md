@@ -4,12 +4,14 @@ Diário alimentar por foto para iOS: fotografe o prato, confira as porções e r
 
 ## Requisitos
 
-- Xcode 16 ou mais novo (Swift 6)
+- Xcode 26.2 ou mais novo (o Firebase Apple SDK 13 exige Swift 6.2)
 - iOS 17+
 
 ## Como rodar
 
 Abra `Prato.xcodeproj` e rode o esquema **Prato**. O Xcode resolve as dependências do pacote local `PratoKit` sozinho.
+
+A análise das fotos usa o Gemini pelo Firebase AI Logic. Sem o `GoogleService-Info.plist` o app usa uma análise de mentira e nada sai do aparelho; veja [docs/firebase-setup.md](docs/firebase-setup.md) para configurar o Firebase e o App Check.
 
 Para testar em inglês: *Product › Scheme › Edit Scheme › Run › Options › App Language › English*.
 
@@ -21,9 +23,15 @@ O app é fino: só `PratoApp.swift`, assets e o `InfoPlist.xcstrings`. Todo o re
 Prato/                    target do app
 PratoKit/
   Sources/
-    DesignSystem/         cores (claro e escuro), tipografia, botões, ilustração do prato
+    DesignSystem/         cores (claro e escuro), tipografia, botões, ilustração do prato, card de macros
+    MealKit/              domínio: alimentos, porções, regra de arredondamento, MealAnalyzing + mock
+    MealStore/            diário em SwiftData (SwiftDataMealStore), com cópia dos valores de cada alimento
+    FoodRecognition/      resposta do Gemini: decodificação, validação e ligação com o catálogo (sem Firebase)
+    GeminiAnalysis/       GeminiMealAnalyzer, schema, Firebase e App Check
     HomeFeature/          tela Hoje: HomeView, HomeViewModel, HomeEvent
-    AppFeature/           AppCoordinator, tab bar e telas provisórias
+    HistoryFeature/       tela Histórico: semana, dia selecionado, totais e média
+    ScanFeature/          fluxo de registro: câmera, conferir foto, análise, revisão e ajuste de porção
+    AppFeature/           AppCoordinator e tab bar
   Tests/                  Swift Testing, um alvo por módulo
 ```
 

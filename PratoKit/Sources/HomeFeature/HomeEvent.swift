@@ -1,10 +1,5 @@
 import Coordinator
-
-/// Where the photo of a meal will come from.
-public enum ScanSource: Hashable, Sendable {
-    case camera
-    case gallery
-}
+import MealKit
 
 /// What the user did on Hoje that someone else must act on.
 public enum HomeEvent: Event, Equatable {
