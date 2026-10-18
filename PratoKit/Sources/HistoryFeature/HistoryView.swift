@@ -243,7 +243,7 @@ private struct DayCell: View {
 }
 
 /// "Escolher dia": a calendar up to today. Tapping a day picks it right away.
-private struct DayPickerSheet: View {
+struct DayPickerSheet: View {
 
     @State private var day: Date
 
