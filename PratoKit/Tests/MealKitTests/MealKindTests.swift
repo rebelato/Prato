@@ -28,4 +28,9 @@ struct MealKindTests {
     func suggestedKindFollowsTheHour(hour: Int, expected: MealKind) {
         #expect(MealKind.suggested(for: date(hour: hour), calendar: calendar) == expected)
     }
+
+    @Test func freeMealIsLastAndNeverSuggested() {
+        #expect(MealKind.allCases.last == .free)
+        #expect((0..<24).allSatisfy { MealKind.suggested(for: date(hour: $0), calendar: calendar) != .free })
+    }
 }

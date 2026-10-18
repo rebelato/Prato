@@ -13,6 +13,8 @@ extension MealKind {
             String(localized: "mealKind.snack", defaultValue: "Lanche", bundle: .module, comment: "Meal type")
         case .dinner:
             String(localized: "mealKind.dinner", defaultValue: "Jantar", bundle: .module, comment: "Meal type")
+        case .free:
+            String(localized: "mealKind.free", defaultValue: "Refeição livre", bundle: .module, comment: "Meal type: a meal outside the diet plan")
         }
     }
 }

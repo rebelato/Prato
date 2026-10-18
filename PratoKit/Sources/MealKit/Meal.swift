@@ -6,6 +6,9 @@ public enum MealKind: String, CaseIterable, Hashable, Sendable {
     case lunch
     case snack
     case dinner
+    /// A meal outside the plan, such as the diet's free meal. Never suggested by the hour:
+    /// the user picks it.
+    case free
 
     /// The meal people usually eat at `date`'s hour: breakfast 5–10h, lunch 10–15h,
     /// snack 15–18h, dinner otherwise.

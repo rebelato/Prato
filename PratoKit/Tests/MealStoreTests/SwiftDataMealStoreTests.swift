@@ -38,6 +38,15 @@ struct SwiftDataMealStoreTests {
         #expect(saved.totals == original.totals)
     }
 
+    @Test func freeMealKeepsItsKind() async throws {
+        let store = try SwiftDataMealStore.make(inMemory: true)
+
+        let saved = try await store.save(draft(.free, at: date(day: 16, hour: 21)))
+        let fetched = try await store.meals(in: calendar.dayInterval(containing: saved.date))
+
+        #expect(fetched.map(\.kind) == [.free])
+    }
+
     @Test func itemsKeepTheirOrder() async throws {
         let store = try SwiftDataMealStore.make(inMemory: true)
         let ids = ["tomato", "egg-boiled", "rice-white-cooked", "banana", "beef-grilled"]
