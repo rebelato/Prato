@@ -35,6 +35,23 @@
         }
       }
     },
+    "mealKind.free": {
+      "comment": "Meal type: a meal outside the diet plan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free meal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeição livre"
+          }
+        }
+      }
+    },
     "mealKind.lunch": {
       "comment": "Meal type",
       "localizations": {

@@ -1225,6 +1225,23 @@
         }
       }
     },
+    "saved.title.free": {
+      "comment": "Confirmation title after saving a free meal",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free meal saved."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeição livre salva."
+          }
+        }
+      }
+    },
     "saved.title.lunch": {
       "comment": "Confirmation title after saving a lunch",
       "localizations": {

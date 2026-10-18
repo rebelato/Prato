@@ -239,6 +239,8 @@ enum L10n {
                 String(localized: "saved.title.snack", defaultValue: "Lanche salvo.", bundle: .module, comment: "Confirmation title after saving a snack")
             case .dinner:
                 String(localized: "saved.title.dinner", defaultValue: "Jantar salvo.", bundle: .module, comment: "Confirmation title after saving a dinner")
+            case .free:
+                String(localized: "saved.title.free", defaultValue: "Refeição livre salva.", bundle: .module, comment: "Confirmation title after saving a free meal")
             }
         }
         static func loggedAt(_ time: String) -> String {
