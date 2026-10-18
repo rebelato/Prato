@@ -12,7 +12,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/rebelato/CoordinatorFramework", from: "2.0.0"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "13.0.0")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "13.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.19.6")
     ],
     targets: [
         .target(
@@ -82,6 +83,14 @@ let package = Package(
             ],
             resources: [.process("Resources")]
         ),
+        .target(
+            name: "SnapshotTestSupport",
+            dependencies: [
+                "DesignSystem",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
+            ],
+            path: "Tests/SnapshotTestSupport"
+        ),
         .testTarget(
             name: "MealKitTests",
             dependencies: ["MealKit"]
@@ -96,19 +105,23 @@ let package = Package(
         ),
         .testTarget(
             name: "HomeFeatureTests",
-            dependencies: ["HomeFeature", "MealKit"]
+            dependencies: ["HomeFeature", "MealKit", "SnapshotTestSupport"],
+            exclude: ["__Snapshots__"]
         ),
         .testTarget(
             name: "HistoryFeatureTests",
-            dependencies: ["HistoryFeature", "MealKit"]
+            dependencies: ["HistoryFeature", "MealKit", "SnapshotTestSupport"],
+            exclude: ["__Snapshots__"]
         ),
         .testTarget(
             name: "ScanFeatureTests",
             dependencies: [
                 "ScanFeature",
                 "MealKit",
+                "SnapshotTestSupport",
                 .product(name: "Coordinator", package: "CoordinatorFramework")
-            ]
+            ],
+            exclude: ["__Snapshots__"]
         ),
         .testTarget(
             name: "AppFeatureTests",
